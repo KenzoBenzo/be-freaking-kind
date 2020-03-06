@@ -1,6 +1,7 @@
 import React from "react";
 import ProductGrid from "../components/productGrid";
 import { Hero } from "../components/hero";
+import { graphql } from "gatsby";
 
 function IndexPage({
   data: {
@@ -9,7 +10,7 @@ function IndexPage({
 }) {
   return (
     <>
-      <Hero text="Just be fucking kind." />
+      <Hero text='Just be fucking kind.' />
       <ProductGrid products={products} />
     </>
   );

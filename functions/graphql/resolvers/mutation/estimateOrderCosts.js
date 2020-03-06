@@ -5,7 +5,6 @@ const estimateOrderCosts = async (_, { input }, { dataSources }) => {
       state: state_code,
       ...rest
     } = input.shippingAddress;
-    console.log(input);
 
     const {
       costs: { currency, shipping: shippingRate, tax: taxRate, vat: vatRate }

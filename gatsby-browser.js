@@ -28,7 +28,10 @@ const randomCartId = () =>
     .substring(7);
 
 const client = new GraphQLClient({
-  url: "/.netlify/functions/graphql"
+  url:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:8000/.netlify/functions/graphql"
+      : "/.netlify/functions/graphql"
 });
 
 export const wrapPageElement = ({ element, props }) => {
