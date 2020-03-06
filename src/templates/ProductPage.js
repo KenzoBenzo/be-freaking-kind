@@ -4,7 +4,20 @@ import Img from "gatsby-image";
 import { useCart } from "react-use-cart";
 import queryString from "query-string";
 import { navigate } from "@reach/router";
-
+import {
+  Heading,
+  Text,
+  FormLabel,
+  Select,
+  Button,
+  Grid,
+  Tabs,
+  Tab,
+  TabPanel,
+  TabPanels,
+  TabList,
+  Stack
+} from "@chakra-ui/core";
 // import ReviewsList from "../components/ReviewsList";
 import SEO from "../components/SEO";
 
@@ -32,7 +45,7 @@ function ProductPage({
   }, [activeVariantId]);
 
   return (
-    <React.Fragment>
+    <>
       <SEO
         pageTitle={product.name}
         image={
@@ -42,111 +55,116 @@ function ProductPage({
         }
       />
 
-      <div>
-        <div>
-          <div>
-            <Img
-              fluid={
-                activeVariant
-                  ? activeVariant.variantImage.childImageSharp.fluid
-                  : product.printfulProduct.productImage.childImageSharp.fluid
+      <Grid templateColumns="repeat(2, 2fr)" gap={8}>
+        <Tabs>
+          <TabPanels>
+            <TabPanel>
+              <Img
+                fluid={activeVariant.variantImage.childImageSharp.fluid}
+                alt={product.name}
+                title={product.name}
+                style={{ borderRadius: 4 }}
+              />
+            </TabPanel>
+            <TabPanel>
+              <Img
+                fluid={
+                  product.printfulProduct.productImage.childImageSharp.fluid
+                }
+                alt={product.name}
+                title={product.name}
+                style={{ borderRadius: 4 }}
+              />
+            </TabPanel>
+          </TabPanels>
+          <TabList>
+            <Tab>
+              <Img
+                fluid={
+                  activeVariant
+                    ? activeVariant.variantImage.childImageSharp.fluid
+                    : product.printfulProduct.productImage.childImageSharp.fluid
+                }
+                alt={product.name}
+                title={product.name}
+                style={{ borderRadius: 4, height: 64, width: 96 }}
+              />
+            </Tab>
+            <Tab>
+              <Img
+                fluid={
+                  product.printfulProduct.productImage.childImageSharp.fluid
+                }
+                alt={product.name}
+                title={product.name}
+                style={{ borderRadius: 4, height: 64, width: 96 }}
+              />
+            </Tab>
+          </TabList>
+        </Tabs>
+
+        <Stack spacing={4}>
+          <Heading as="h1">{product.name}</Heading>
+
+          <Text>{activeVariant && activeVariant.formattedPrice}</Text>
+
+          {product.description && <Text>{product.description.markdown}</Text>}
+          <FormLabel htmlFor="style">
+            Size
+            <Select
+              id="style"
+              value={activeVariantId}
+              onChange={({ target: { value } }) => setActiveVariantId(value)}
+            >
+              {variants.map((variant, index) => (
+                <option key={index} value={variant.id}>
+                  {variant.splitName}
+                </option>
+              ))}
+            </Select>
+          </FormLabel>
+          <FormLabel htmlFor="quantity">
+            Quantity
+            <Select
+              id="quantity"
+              value={variantQuantity}
+              onChange={({ target: { value } }) =>
+                setVariantQuantity(parseInt(value))
               }
-              alt={product.name}
-              title={product.name}
-            />
-          </div>
-        </div>
-
-        <div>
-          <h1>{product.name}</h1>
-
-          <div>
-            <p>{activeVariant && activeVariant.formattedPrice}</p>
-          </div>
-
-          {product.description && (
-            <div>
-              <p>{product.description.markdown}</p>
-            </div>
-          )}
-          <div>
-            <div>
-              <label htmlFor='style'>Style</label>
-
-              <div>
-                <select
-                  id='style'
-                  value={activeVariantId}
-                  onChange={({ target: { value } }) =>
-                    setActiveVariantId(value)
-                  }>
-                  {variants.map((variant, index) => (
-                    <option key={index} value={variant.id}>
-                      {variant.splitName}
-                    </option>
-                  ))}
-                </select>
-
-                <div>
-                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
-                    <path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor='quantity'>Quantity</label>
-
-              <div>
-                <select
-                  id='quantity'
-                  value={variantQuantity}
-                  onChange={({ target: { value } }) =>
-                    setVariantQuantity(parseInt(value))
-                  }>
-                  {new Array(5)
-                    .fill(0)
-                    .map((v, k) => k + 1)
-                    .map(i => ({ value: i, label: i }))
-                    .map(({ value, label }) => (
-                      <option key={value} value={value}>
-                        {label}
-                      </option>
-                    ))}
-                </select>
-
-                <div>
-                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
-                    <path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <button
-              onClick={() =>
-                addItem(
-                  {
-                    id: activeVariant.id,
-                    price: activeVariant.retail_price,
-                    image: activeVariant.variantImage,
-                    name: activeVariant.name,
-                    description: product.description.markdown
-                  },
-                  variantQuantity
-                )
-              }
-              disabled={!activeVariant}>
-              Add to cart
-            </button>
-          </div>
-        </div>
-      </div>
+            >
+              {new Array(5)
+                .fill(0)
+                .map((v, k) => k + 1)
+                .map(i => ({ value: i, label: i }))
+                .map(({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+            </Select>
+          </FormLabel>
+          <Button
+            onClick={() =>
+              addItem(
+                {
+                  id: activeVariant.id,
+                  price: activeVariant.retail_price,
+                  image: activeVariant.variantImage,
+                  name: activeVariant.name,
+                  description: product.description.markdown
+                },
+                variantQuantity
+              )
+            }
+            disabled={!activeVariant}
+          >
+            Add to cart
+          </Button>
+        </Stack>
+      </Grid>
 
       {/* <ReviewsList productId={product.id} reviews={product.reviews} /> */}
-    </React.Fragment>
+    </>
   );
 }
 
@@ -182,21 +200,6 @@ export const pageQuery = graphql`
               }
             }
           }
-        }
-        reviews(orderBy: createdAt_DESC) {
-          id
-          email
-          gravatar {
-            childImageSharp {
-              fluid(maxWidth: 560) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-          name
-          headline
-          message
-          rating
         }
       }
     }

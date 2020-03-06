@@ -1,14 +1,7 @@
 import React from "react";
 import { useCart } from "react-use-cart";
 import Img from "gatsby-image";
-import {
-  Button,
-  IconButton,
-  Flex,
-  Text,
-  Stack,
-  DarkMode
-} from "@chakra-ui/core";
+import { IconButton, Heading, Text, Stack, Box } from "@chakra-ui/core";
 
 function CartItem({ id, name, quantity, price, image }) {
   const { updateItemQuantity, removeItem } = useCart();
@@ -30,48 +23,57 @@ function CartItem({ id, name, quantity, price, image }) {
   }).format(total / 100);
 
   return (
-    <Flex
+    <Stack
       key={id}
-      justifyContent='space-between'
-      align='center'
-      backgroundColor='gray.900'
+      backgroundColor="gray.800"
       p={4}
-      borderRadius='md'
-      mb={4}>
-      <div>
-        <Img
-          fluid={image.childImageSharp.fluid}
-          alt={name}
-          title={name}
-          style={{ height: 80, borderRadius: 4, marginBottom: 16 }}
-        />
-        <Text color='white'>{name}</Text>
-      </div>
-
-      <Stack isInline align='center' spacing={4}>
-        <IconButton icon='add' size='sm' variant='ghost' onClick={increment} />
-        <Text color='white'>{quantity}</Text>
+      borderRadius="md"
+      isInline
+      align="center"
+      justify="space-between"
+    >
+      <Img
+        fluid={image.childImageSharp.fluid}
+        alt={name}
+        title={name}
+        style={{ height: 64, width: 64, borderRadius: 4 }}
+      />
+      <Box ml={4}>
+        <Heading as="h4" color="white" fontSize="sm" mb={2}>
+          {name}
+        </Heading>
+        {quantity > 1 ? (
+          <Text color="white" fontSize="sm">
+            {formattedUnitPrice} /each
+          </Text>
+        ) : (
+          <Text color="white" fontSize="sm">
+            {formattedLineTotal}
+          </Text>
+        )}
+        <Text onClick={remove} color="red.200" fontSize="sm" cursor="pointer">
+          Remove
+        </Text>
+      </Box>
+      <Stack spacing={2} justify="center" textAlign="center">
         <IconButton
-          icon='minus'
-          size='sm'
-          variant='ghost'
+          icon="chevron-up"
+          size="xs"
+          variant="ghost"
+          onClick={increment}
+        />
+        <Text color="white" fontSize="sm">
+          {quantity}
+        </Text>
+        <IconButton
+          icon="chevron-down"
+          size="xs"
+          variant="ghost"
           onClick={decrement}
+          isDisabled={quantity <= 1 ? true : false}
         />
       </Stack>
-
-      <div>
-        <Text color='white'>{formattedLineTotal}</Text>
-        {quantity > 1 && <Text color='white'>{formattedUnitPrice} each</Text>}
-      </div>
-
-      <Button
-        rightIcon='small-close'
-        variantColor='red'
-        variant='ghost'
-        onClick={remove}>
-        Remove
-      </Button>
-    </Flex>
+    </Stack>
   );
 }
 

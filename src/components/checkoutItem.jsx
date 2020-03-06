@@ -1,6 +1,6 @@
 import React from "react";
 import Img from "gatsby-image";
-import { Flex, Text } from "@chakra-ui/core";
+import { Stack, Text } from "@chakra-ui/core";
 
 function CheckoutItem({ id, name, quantity, price, image }) {
   const total = quantity * price;
@@ -11,27 +11,32 @@ function CheckoutItem({ id, name, quantity, price, image }) {
   }).format(total / 100);
 
   return (
-    <Flex
+    <Stack
       key={id}
-      justifyContent='space-between'
-      align='center'
-      backgroundColor='gray.900'
-      py={4}
-      px={4}
-      borderRadius='md'
-      mb={4}>
-      <div>
-        <Img
-          fluid={image.childImageSharp.fluid}
-          alt={name}
-          title={name}
-          style={{ height: 80, width: 200, borderRadius: 4, marginBottom: 16 }}
-        />
-        <Text color='white'>quantity: {quantity}</Text>
-      </div>
-      <Text color='white'>{name}</Text>
-      <Text color='white'>{formattedLineTotal}</Text>
-    </Flex>
+      backgroundColor="gray.800"
+      p={4}
+      borderRadius="md"
+      isInline
+      align="center"
+      justify="space-between"
+      spacing={4}
+    >
+      <Img
+        fluid={image.childImageSharp.fluid}
+        alt={name}
+        title={name}
+        style={{ height: 64, width: 64, borderRadius: 4 }}
+      />
+      <Text color="white" ml={4} fontSize="sm">
+        {name}
+      </Text>
+      <Text color="white" fontSize="sm">
+        x{quantity}
+      </Text>
+      <Text color="white" fontSize="sm">
+        {formattedLineTotal}
+      </Text>
+    </Stack>
   );
 }
 

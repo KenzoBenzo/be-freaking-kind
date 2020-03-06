@@ -92,7 +92,8 @@ function CheckoutProvider({ children }) {
         orderTotal,
         updateShipping,
         updateTax
-      }}>
+      }}
+    >
       {children}
     </CheckoutContext.Provider>
   );
