@@ -19,15 +19,15 @@ function SuccessPage({ location }) {
   if (!showSuccessScreen)
     return (
       <>
-        <Hero text='Oops!' />
+        <Hero text="Oops!" />
         <p>You've no business being on this page!</p>
       </>
     );
 
   return (
     <>
-      <SEO pageTitle='Thank you for your order' />
-      <Hero text='Thanks!' />
+      <SEO pageTitle="Thank you for your order" />
+      <Hero text="Thanks!" />
 
       <p>
         Please take note of your order reference for your records:{" "}

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { useFormContext, ErrorMessage } from "react-hook-form";
 import { CardElement } from "@stripe/react-stripe-js";
-// import LoadingSVG from "../../svg/loading.svg";
 import CheckoutContext from "../../context/checkout";
 import PaymentInfo from "./paymentInfo";
+import { Heading, Button, Text } from "@chakra-ui/core";
 
 function PaymentForm() {
   const { errors, register, setValue } = useFormContext();
@@ -27,7 +27,9 @@ function PaymentForm() {
   return (
     <div>
       <div>
-        <h3>Pay</h3>
+        <Heading as="h3" mt={6}>
+          Pay
+        </Heading>
         {!allowPayment && (
           <p>You must calculate shipping totals before proceeding to payment</p>
         )}
@@ -46,18 +48,22 @@ function PaymentForm() {
 
             {errors.stripe && (
               <React.Fragment>
-                <ErrorMessage as={<p />} name='stripe' errors={errors} />
+                <ErrorMessage as={<p />} name="stripe" errors={errors} />
               </React.Fragment>
             )}
           </div>
 
-          {checkoutError && <p>{checkoutError}</p>}
+          {checkoutError && <Text color="red.500">{checkoutError}</Text>}
           {checkoutProcessing && "Please wait. Processing order."}
           {checkoutSuccess && "Order successfully received."}
           <div>
-            <button type='submit' disabled={checkoutProcessing}>
-              {/* {checkoutProcessing ? <LoadingSVG /> : "Pay for order"} */}
-            </button>
+            <Button
+              type="submit"
+              isLoading={checkoutProcessing}
+              isDisabled={checkoutProcessing}
+            >
+              Pay for order
+            </Button>
           </div>
         </React.Fragment>
       )}

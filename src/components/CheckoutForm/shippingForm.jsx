@@ -1,8 +1,16 @@
 import React, { useContext } from "react";
 import { useFormContext } from "react-hook-form";
-// import LoadingSVG from "../../svg/loading.svg";
 import CheckoutContext from "../../context/checkout";
-import { Input, Checkbox, Select } from "@chakra-ui/core";
+import {
+  Input,
+  Select,
+  Button,
+  Heading,
+  Stack,
+  FormLabel,
+  FormControl,
+  FormErrorMessage
+} from "@chakra-ui/core";
 import usePrintfulShippingCountries from "../../hooks/usePrintfulShippingCountries";
 
 function ShippingForm() {
@@ -23,139 +31,158 @@ function ShippingForm() {
   const disableInput = allowPayment || checkoutProcessing;
 
   return (
-    <div>
-      <h3>Shipping</h3>
-
-      <div>
+    <Stack spacing={4}>
+      <Heading as='h3'>Shipping</Heading>
+      <FormControl>
+        <FormLabel htmlFor='shippingName'>Name</FormLabel>
         <Input
           name='shipping.name'
-          placeholder='Name'
-          disabled={disableInput}
-          register={register({ required: "Shipping name is required" })}
-          errors={errors}
+          isDisabled={disableInput}
+          ref={register({ required: "Shipping name is required" })}
         />
-      </div>
+        {/* <FormErrorMessage>
+          {errors.name && errors.name.message}
+        </FormErrorMessage> */}
+      </FormControl>
 
-      <div>
-        <div>
-          <Input
-            name='email'
-            type='email'
-            placeholder='Email address'
-            disabled={disableInput}
-            register={register({
-              required: "Email is required",
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: "Email is invalid"
-              }
-            })}
-            errors={errors}
-          />
-        </div>
+      <FormControl>
+        <FormLabel htmlFor='email'>Email address</FormLabel>
+        <Input
+          name='email'
+          type='email'
+          isDisabled={disableInput}
+          ref={register({
+            required: "Email is required",
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: "Email is invalid"
+            }
+          })}
+        />
+        <FormErrorMessage>
+          {errors.email && errors.email.message}
+        </FormErrorMessage>
+      </FormControl>
 
-        <div>
-          <Input
-            name='phone'
-            type='tel'
-            placeholder='Contact no.'
-            disabled={disableInput}
-            register={register}
-            errors={errors}
-          />
-        </div>
-      </div>
+      <FormControl>
+        <Input
+          name='phone'
+          type='tel'
+          placeholder='Contact no.'
+          isDisabled={disableInput}
+          register={register}
+        />
+      </FormControl>
 
-      <div>
+      <FormControl>
+        <FormLabel htmlFor='address1'>Address</FormLabel>
         <Input
           name='shipping.address1'
-          placeholder='Address line 1'
-          disabled={disableInput}
-          register={register({
+          isDisabled={disableInput}
+          ref={register({
             required: "Shipping address line 1 is required"
           })}
-          errors={errors}
         />
-      </div>
+        <FormErrorMessage>
+          {errors.address1 && errors.address1.message}
+        </FormErrorMessage>
+      </FormControl>
 
-      <div>
+      <FormControl>
+        <FormLabel htmlFor='address2'>
+          Apartment, suite, etc. (optional)
+        </FormLabel>
         <Input
           name='shipping.address2'
-          placeholder='Apartment, suite, etc. (optional)'
-          disabled={disableInput}
-          register={register}
-          errors={errors}
+          isDisabled={disableInput}
+          ref={register}
         />
-      </div>
+      </FormControl>
 
-      <div>
-        <div>
-          <Input
-            name='shipping.city'
-            placeholder='City'
-            disabled={disableInput}
-            register={register({ required: "Shipping city is required" })}
-            errors={errors}
-          />
-        </div>
+      <FormControl>
+        <FormLabel htmlFor='city'>City</FormLabel>
+        <Input
+          name='shipping.city'
+          isDisabled={disableInput}
+          ref={register({ required: "Shipping city is required" })}
+        />
+        <FormErrorMessage>
+          {errors.city && errors.city.message}
+        </FormErrorMessage>
+      </FormControl>
 
-        <div>
+      <FormControl>
+        <FormLabel htmlFor='country'>Country</FormLabel>
+        <Select
+          name='shipping.country'
+          isDisabled={disableInput}
+          ref={register({ required: "Shipping country is required" })}>
+          {shippingCountries.map(({ code: value, name }) => {
+            return (
+              <option key={value} value={value}>
+                {name}
+              </option>
+            );
+          })}
+        </Select>
+        <FormErrorMessage>
+          {errors.country && errors.country.message}
+        </FormErrorMessage>
+      </FormControl>
+
+      {activeShippingCountry && activeShippingCountry.states && (
+        <FormControl>
+          <FormLabel htmlFor='state'>State</FormLabel>
           <Select
-            name='shipping.country'
-            disabled={disableInput}
-            register={register({ required: "Shipping country is required" })}
-            options={shippingCountries.map(({ code: value, name }) => ({
-              value,
-              name
-            }))}
-            errors={errors}
-          />
-        </div>
-      </div>
+            name='shipping.state'
+            isDisabled={disableInput}
+            ref={register({ required: "Shipping state is required" })}>
+            {activeShippingCountry.states.map(({ code: value, name }) => {
+              return (
+                <option key={value} value={value}>
+                  {name}
+                </option>
+              );
+            })}
+          </Select>
+          <FormErrorMessage>
+            {errors.state && errors.state.message}
+          </FormErrorMessage>
+        </FormControl>
+      )}
 
-      <div>
-        {activeShippingCountry && activeShippingCountry.states && (
-          <div>
-            <Select
-              name='shipping.state'
-              disabled={disableInput}
-              register={register({ required: "Shipping state is required" })}
-              options={activeShippingCountry.states.map(
-                ({ code: value, name }) => ({
-                  value,
-                  name
-                })
-              )}
-              errors={errors}
-            />
-          </div>
-        )}
-
-        <div>
-          <Input
-            name='shipping.zip'
-            placeholder='ZIP / Postcode'
-            disabled={disableInput}
-            register={register({ required: "Shipping ZIP is required" })}
-            errors={errors}
-          />
-        </div>
-      </div>
+      <FormControl>
+        <FormLabel htmlFor='zipcode'>ZIP / Postcode</FormLabel>
+        <Input
+          name='shipping.zip'
+          isDisabled={disableInput}
+          ref={register({ required: "Shipping ZIP is required" })}
+        />
+        <FormErrorMessage>{errors.zip && errors.zip.message}</FormErrorMessage>
+      </FormControl>
 
       {!allowPayment && (
-        <div>
-          <Checkbox
-            name='separateBilling'
-            disabled={disableInput}
-            register={register}>
+        <Stack isInline justify='space-between'>
+          <FormLabel display='flex' alignItems='center'>
+            <Input
+              name='separateBilling'
+              type='checkbox'
+              isDisabled={disableInput}
+              ref={register}
+              w={6}
+              _focus={{ borderColor: "none" }}
+            />
             Use different billing address
-          </Checkbox>
-          <button type='submit' disabled={disableInput}>
-            {/* {checkoutProcessing ? <LoadingSVG /> : "Calculate shipping"} */}
-          </button>
-        </div>
+          </FormLabel>
+          <Button
+            type='submit'
+            isLoading={checkoutProcessing}
+            isDisabled={disableInput}>
+            Calculate shipping
+          </Button>
+        </Stack>
       )}
-    </div>
+    </Stack>
   );
 }
 

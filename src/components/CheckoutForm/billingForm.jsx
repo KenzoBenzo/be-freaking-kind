@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useFormContext } from "react-hook-form";
-import { Input, Select } from "@chakra-ui/core";
+import { Input, Select, Heading } from "@chakra-ui/core";
 import CheckoutContext from "../../context/checkout";
 
 import usePrintfulShippingCountries from "../../hooks/usePrintfulShippingCountries";
@@ -24,13 +24,13 @@ function BillingForm() {
 
   return (
     <div>
-      <h3>Billing</h3>
+      <Heading as="h3">Billing</Heading>
 
       <div>
         <Input
-          name='billing.name'
-          placeholder='Name'
-          disabled={disableInput}
+          name="name"
+          placeholder="Name"
+          isDisabled={disableInput}
           register={register({ required: "Billing name is required" })}
           errors={errors}
         />
@@ -38,9 +38,9 @@ function BillingForm() {
 
       <div>
         <Input
-          name='billing.address1'
-          placeholder='Address line 1'
-          disabled={disableInput}
+          name="address1"
+          placeholder="Address line 1"
+          isDisabled={disableInput}
           register={register({
             required: "Billing address line 1 is required"
           })}
@@ -50,9 +50,9 @@ function BillingForm() {
 
       <div>
         <Input
-          name='billing.address2'
-          placeholder='Apartment, suite, etc. (optional)'
-          disabled={disableInput}
+          name="address2"
+          placeholder="Apartment, suite, etc. (optional)"
+          isDisabled={disableInput}
           register={register}
           errors={errors}
         />
@@ -61,17 +61,17 @@ function BillingForm() {
       <div>
         <div>
           <Input
-            name='billing.city'
-            placeholder='City'
-            disabled={disableInput}
+            name="city"
+            placeholder="City"
+            isDisabled={disableInput}
             register={register({ required: "Billing city is required" })}
             errors={errors}
           />
         </div>
         <div>
           <Select
-            name='billing.country'
-            disabled={disableInput}
+            name="country"
+            isDisabled={disableInput}
             register={register({ required: "Billing country is required" })}
             options={shippingCountries.map(({ code: value, name }) => ({
               value,
@@ -86,8 +86,8 @@ function BillingForm() {
         {activeBillingCountry && activeBillingCountry.states && (
           <div>
             <Select
-              name='billing.state'
-              disabled={disableInput}
+              name="state"
+              isDisabled={disableInput}
               register={register({ required: "Billing state is required" })}
               options={activeBillingCountry.states.map(
                 ({ code: value, name }) => ({
@@ -102,9 +102,9 @@ function BillingForm() {
 
         <div>
           <Input
-            name='billing.zip'
-            placeholder='ZIP / Postcode'
-            disabled={disableInput}
+            name="zip"
+            placeholder="ZIP / Postcode"
+            isDisabled={disableInput}
             register={register({ required: "Billing ZIP is required" })}
             errors={errors}
           />

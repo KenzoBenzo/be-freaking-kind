@@ -6,8 +6,8 @@ import { Hero } from "../components/hero";
 function CheckoutPage() {
   return (
     <React.Fragment>
-      <SEO pageTitle='Checkout' />
-      <Hero text='Checkout.' />
+      <SEO pageTitle="Checkout" />
+      <Hero text="Checkout." />
       <Checkout />
     </React.Fragment>
   );

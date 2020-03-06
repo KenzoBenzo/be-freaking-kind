@@ -24,30 +24,31 @@ function SEO({ children, pageDescription, pageTitle, pageUrl, image }) {
       <Helmet
         defaultTitle={siteTitle}
         htmlAttributes={{ lang: "en" }}
-        titleTemplate={`%s | ${siteTitle}`}>
+        titleTemplate={`%s | ${siteTitle}`}
+      >
         <title>{pageTitle || siteDescription}</title>
-        <meta name='description' content={pageDescription || siteDescription} />
+        <meta name="description" content={pageDescription || siteDescription} />
 
-        <meta property='og:url' content={pageUrl || siteUrl} />
+        <meta property="og:url" content={pageUrl || siteUrl} />
         <meta
-          property='og:description'
+          property="og:description"
           content={pageDescription || siteDescription}
         />
         <meta
-          property='og:title'
+          property="og:title"
           content={`${pageTitle || siteDescription} | ${siteTitle}`}
         />
-        {image && <meta property='og:image' content={withPrefix(image)} />}
+        {image && <meta property="og:image" content={withPrefix(image)} />}
 
         <meta
-          property='twitter:title'
+          property="twitter:title"
           content={`${pageTitle || siteDescription} | ${siteTitle}`}
         />
         <meta
-          property='twitter:card'
+          property="twitter:card"
           content={image ? "summary_large_media" : "summary"}
         />
-        {image && <meta property='twitter:image' content={withPrefix(image)} />}
+        {image && <meta property="twitter:image" content={withPrefix(image)} />}
       </Helmet>
       {children}
     </React.Fragment>

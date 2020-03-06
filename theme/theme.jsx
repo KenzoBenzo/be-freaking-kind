@@ -1,21 +1,21 @@
-import { theme } from "@chakra-ui/core"
-import customIcons from "./icons"
-import customColors from "./colors"
+import { theme } from "@chakra-ui/core";
+import customIcons from "./icons";
+import customColors from "./colors";
 
 const customTheme = {
   ...theme,
   icons: {
     ...theme.icons,
-    ...customIcons,
+    ...customIcons
   },
   colors: {
     ...theme.colors,
-    ...customColors,
+    ...customColors
   },
   fonts: {
     body: "Inter var, sans-serif",
     heading: "Inter var, sans-serif",
-    mono: "Fira Code, monospace",
+    mono: "Fira Code, monospace"
   },
   fontSizes: {
     xs: "12px",
@@ -27,7 +27,7 @@ const customTheme = {
     "3xl": "28px",
     "4xl": "32px",
     "5xl": "48px",
-    "6xl": "64px",
+    "6xl": "64px"
   },
   fontWeights: {
     100: 100,
@@ -38,7 +38,7 @@ const customTheme = {
     600: 600,
     700: 700,
     800: 800,
-    900: 900,
+    900: 900
   },
   lineHeights: {
     tiny: "0.8",
@@ -47,7 +47,7 @@ const customTheme = {
     shorter: "1.2",
     short: "1.4",
     tall: "1.6",
-    taller: "2",
+    taller: "2"
   },
   letterSpacings: {
     tighter: "-0.05em",
@@ -55,7 +55,7 @@ const customTheme = {
     normal: "0",
     wide: "0.025em",
     wider: "0.05em",
-    widest: "0.1em",
+    widest: "0.1em"
   },
   breakpoints: ["30em", "48em", "62em", "80em"],
   space: {
@@ -73,8 +73,8 @@ const customTheme = {
     "16": "6rem",
     "20": "8rem",
     "24": "11rem",
-    "32": "16rem",
-  },
-}
+    "32": "16rem"
+  }
+};
 
-export default customTheme
+export default customTheme;

@@ -9,7 +9,7 @@ function IndexPage({
 }) {
   return (
     <>
-      <Hero text='Just be fucking kind.' />
+      <Hero text="Just be fucking kind." />
       <ProductGrid products={products} />
     </>
   );

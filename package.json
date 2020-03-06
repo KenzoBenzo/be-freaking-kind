@@ -5,7 +5,8 @@
     "build": "gatsby build",
     "clean": "gatsby clean",
     "dev": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "prodserve": "gatsby build && gatsby serve"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.2.8",

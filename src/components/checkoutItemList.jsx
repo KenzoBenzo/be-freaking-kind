@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useCart } from "react-use-cart";
-
 import CheckoutItem from "./checkoutItem";
 import CheckoutContext from "../context/checkout";
+import { StatNumber, StatLabel, Stat, Divider, Stack } from "@chakra-ui/core";
 
 function CheckoutItemList() {
   const { items, cartTotal } = useCart();
@@ -15,26 +15,32 @@ function CheckoutItemList() {
     }).format(value / 100);
 
   return (
-    <div>
+    <Stack
+      backgroundColor="gray.900"
+      p={4}
+      borderRadius="md"
+      spacing={4}
+      color="white"
+    >
       {items.map(CheckoutItem)}
-      <div>
-        <span>Sub total</span>
-        <span>{formatValue(cartTotal)}</span>
-      </div>
-      <div>
-        <span>Tax</span>
-        <span>{tax ? formatValue(tax) : "-"}</span>
-      </div>
-      <div>
-        <span>Shipping</span>
-        <span>{shipping ? formatValue(shipping) : "-"}</span>
-      </div>
-      <hr />
-      <div>
-        <span>Total</span>
-        <span>{formatValue(orderTotal)}</span>
-      </div>
-    </div>
+      <Stat>
+        <StatLabel>Subtotal</StatLabel>
+        <StatNumber>{formatValue(cartTotal)}</StatNumber>
+      </Stat>
+      <Stat>
+        <StatLabel>Tax</StatLabel>
+        <StatNumber>{tax ? formatValue(tax) : "-"}</StatNumber>
+      </Stat>
+      <Stat>
+        <StatLabel>Shipping</StatLabel>
+        <StatNumber>{shipping ? formatValue(shipping) : "-"}</StatNumber>
+      </Stat>
+      <Divider borderColor="gray.800" />
+      <Stat>
+        <StatLabel>Total</StatLabel>
+        <StatNumber>{formatValue(orderTotal)}</StatNumber>
+      </Stat>
+    </Stack>
   );
 }
 
