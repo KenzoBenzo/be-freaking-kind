@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useCart } from "react-use-cart";
 import { navigate } from "gatsby";
 import { CheckoutProvider } from "../context/checkout";
-import CheckoutForm from "../components/checkoutForm";
+import CheckoutForm from "../components/CheckoutForm";
 import CheckoutItemList from "./checkoutItemList";
 import { Grid } from "@chakra-ui/core";
 
@@ -23,7 +23,7 @@ function Checkout() {
 
   return (
     <CheckoutProvider>
-      <Grid templateColumns="2fr 3fr" gap={6} flexWrap="wrap">
+      <Grid templateColumns='2fr 3fr' gap={6} flexWrap='wrap'>
         <CheckoutItemList />
         <CheckoutForm />
       </Grid>
