@@ -38,6 +38,7 @@ function BillingForm() {
         <FormLabel htmlFor='billingName'>Name</FormLabel>
         <Input
           name='billing.name'
+          size='sm'
           isDisabled={disableInput}
           ref={register({ required: "Billing name is required" })}
         />
@@ -50,6 +51,7 @@ function BillingForm() {
         <FormLabel htmlFor='address1'>Address</FormLabel>
         <Input
           name='billing.address1'
+          size='sm'
           isDisabled={disableInput}
           ref={register({
             required: "Billing address line 1 is required"
@@ -66,50 +68,49 @@ function BillingForm() {
         </FormLabel>
         <Input
           name='billing.address2'
+          size='sm'
           isDisabled={disableInput}
           ref={register}
         />
       </FormControl>
 
-      <FormControl>
-        <FormLabel htmlFor='city'>City</FormLabel>
-        <Input
-          name='billing.city'
-          isDisabled={disableInput}
-          ref={register({ required: "Billing city is required" })}
-        />
-        <FormErrorMessage>
-          {errors.city && errors.city.message}
-        </FormErrorMessage>
-      </FormControl>
-
-      <FormControl>
-        <FormLabel htmlFor='country'>Country</FormLabel>
-        <Select
-          name='billing.country'
-          isDisabled={disableInput}
-          ref={register({ required: "Billing country is required" })}>
-          {shippingCountries.map(({ code: value, name }) => {
-            return (
-              <option key={value} value={value}>
-                {name}
-              </option>
-            );
-          })}
-        </Select>
-        <FormErrorMessage>
-          {errors.country && errors.country.message}
-        </FormErrorMessage>
-      </FormControl>
-
-      {activeBillingCountry && activeBillingCountry.states && (
-        <FormControl>
-          <FormLabel htmlFor='state'>State</FormLabel>
-          <Select
-            name='billing.state'
+      <Stack isInline spacing={4}>
+        <FormControl w='100%'>
+          <FormLabel htmlFor='city'>City</FormLabel>
+          <Input
+            name='billing.city'
+            size='sm'
             isDisabled={disableInput}
-            ref={register({ required: "Billing state is required" })}>
-            {activeBillingCountry.states.map(({ code: value, name }) => {
+            ref={register({ required: "Billing city is required" })}
+          />
+          <FormErrorMessage>
+            {errors.city && errors.city.message}
+          </FormErrorMessage>
+        </FormControl>
+
+        <FormControl>
+          <FormLabel htmlFor='zipcode'>ZIP / Postcode</FormLabel>
+          <Input
+            name='billing.zip'
+            size='sm'
+            isDisabled={disableInput}
+            ref={register({ required: "Billing ZIP is required" })}
+          />
+          <FormErrorMessage>
+            {errors.zip && errors.zip.message}
+          </FormErrorMessage>
+        </FormControl>
+      </Stack>
+
+      <Stack isInline spacing={4}>
+        <FormControl>
+          <FormLabel htmlFor='country'>Country</FormLabel>
+          <Select
+            name='billing.country'
+            size='sm'
+            isDisabled={disableInput}
+            ref={register({ required: "Billing country is required" })}>
+            {shippingCountries.map(({ code: value, name }) => {
               return (
                 <option key={value} value={value}>
                   {name}
@@ -118,20 +119,32 @@ function BillingForm() {
             })}
           </Select>
           <FormErrorMessage>
-            {errors.state && errors.state.message}
+            {errors.country && errors.country.message}
           </FormErrorMessage>
         </FormControl>
-      )}
 
-      <FormControl>
-        <FormLabel htmlFor='zipcode'>ZIP / Postcode</FormLabel>
-        <Input
-          name='billing.zip'
-          isDisabled={disableInput}
-          ref={register({ required: "Billing ZIP is required" })}
-        />
-        <FormErrorMessage>{errors.zip && errors.zip.message}</FormErrorMessage>
-      </FormControl>
+        {activeBillingCountry && activeBillingCountry.states && (
+          <FormControl w='100%'>
+            <FormLabel htmlFor='state'>State</FormLabel>
+            <Select
+              name='billing.state'
+              size='sm'
+              isDisabled={disableInput}
+              ref={register({ required: "Billing state is required" })}>
+              {activeBillingCountry.states.map(({ code: value, name }) => {
+                return (
+                  <option key={value} value={value}>
+                    {name}
+                  </option>
+                );
+              })}
+            </Select>
+            <FormErrorMessage>
+              {errors.state && errors.state.message}
+            </FormErrorMessage>
+          </FormControl>
+        )}
+      </Stack>
     </Stack>
   );
 }

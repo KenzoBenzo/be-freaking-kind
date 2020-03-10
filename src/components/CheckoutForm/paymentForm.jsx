@@ -3,7 +3,7 @@ import { useFormContext, ErrorMessage } from "react-hook-form";
 import { CardElement } from "@stripe/react-stripe-js";
 import CheckoutContext from "../../context/checkout";
 import PaymentInfo from "./paymentInfo";
-import { Heading, Button, Text } from "@chakra-ui/core";
+import { Heading, Button, Text, Box, Stack } from "@chakra-ui/core";
 
 function PaymentForm() {
   const { errors, register, setValue } = useFormContext();
@@ -25,42 +25,29 @@ function PaymentForm() {
   const handleStripeChange = e => setValue("stripe", e);
 
   return (
-    <div>
-      <div>
-        <Heading as='h3' mt={6}>
-          Pay
-        </Heading>
-        {!allowPayment && (
-          <Text>
-            You must calculate shipping totals before proceeding to payment
-          </Text>
-        )}
-      </div>
+    <Stack>
+      <Heading as='h3' mt={6}>
+        Pay
+      </Heading>
+      {!allowPayment && (
+        <Text>
+          You must calculate shipping totals before proceeding to payment
+        </Text>
+      )}
       {allowPayment && (
         <React.Fragment>
           <PaymentInfo />
 
-          <div>
+          <Box
+            my={4}
+            border='1px solid'
+            borderColor='gray.200'
+            borderRadius='md'
+            py='11px'
+            px='8px'
+            w='100%'>
             <CardElement
-              options={{
-                hidePostalCode: true,
-                style: {
-                  base: {
-                    backgroundColor: "#fff",
-                    border: "1px solid #CBD2D9",
-                    borderRadius: "4px",
-                    padding: "4px",
-                    paddingRight: "8px",
-                    width: "100%",
-                    "::focus": {
-                      borderColor: "#30FFE0"
-                    }
-                  },
-                  invalid: {
-                    color: "#9e2146"
-                  }
-                }
-              }}
+              options={{ hidePostalCode: true }}
               disabled={checkoutProcessing}
               onChange={handleStripeChange}
               onReady={el => setValue("cardElement", el)}
@@ -71,7 +58,7 @@ function PaymentForm() {
                 <ErrorMessage as={<p />} name='stripe' errors={errors} />
               </>
             )}
-          </div>
+          </Box>
 
           {checkoutError && <Text color='red.500'>{checkoutError}</Text>}
           {checkoutProcessing && "Please wait. Processing order."}
@@ -87,7 +74,7 @@ function PaymentForm() {
           </div>
         </React.Fragment>
       )}
-    </div>
+    </Stack>
   );
 }
 
