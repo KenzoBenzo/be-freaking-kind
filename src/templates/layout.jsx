@@ -8,11 +8,10 @@ export default function Layout({ children }) {
   return (
     <>
       <Stack
-        minH="100vh"
+        minH='100vh'
         backgroundColor={customTheme.colors.white}
         py={4}
-        px={12}
-      >
+        px={[4, 4, 8, 12]}>
         <Navigation />
         {children}
         <Footer />

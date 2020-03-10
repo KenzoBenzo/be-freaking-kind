@@ -6,7 +6,13 @@ function ProductGrid({ products }) {
   if (!products) return null;
 
   return (
-    <Grid templateColumns='repeat(3, 1fr)' gap={6} flexWrap='wrap'>
+    <Grid
+      templateColumns={[
+        "repeat(auto-fill, 1fr)",
+        "reapeat(auto-fill, 1fr)",
+        "repeat(3, 1fr)"
+      ]}
+      gap={6}>
       {products.map(Product)}
     </Grid>
   );

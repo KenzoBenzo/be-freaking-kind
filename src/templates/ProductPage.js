@@ -16,7 +16,8 @@ import {
   TabPanel,
   TabPanels,
   TabList,
-  Stack
+  Stack,
+  Image
 } from "@chakra-ui/core";
 // import ReviewsList from "../components/ReviewsList";
 import SEO from "../components/SEO";
@@ -55,8 +56,8 @@ function ProductPage({
         }
       />
 
-      <Grid templateColumns="repeat(2, 2fr)" gap={8}>
-        <Tabs>
+      <Grid templateColumns='repeat(2, 2fr)' gap={8}>
+        <Tabs variant='line' borderBottomColor='gray.50'>
           <TabPanels>
             <TabPanel>
               <Img
@@ -76,6 +77,17 @@ function ProductPage({
                 style={{ borderRadius: 4 }}
               />
             </TabPanel>
+            {product.images &&
+              product.images.map(image => (
+                <TabPanel key={image.id}>
+                  <Image
+                    src={`https://media.graphcms.com/${image.handle}`}
+                    borderRadius='md'
+                    h='100%'
+                    m='0 auto'
+                  />
+                </TabPanel>
+              ))}
           </TabPanels>
           <TabList>
             <Tab>
@@ -93,29 +105,41 @@ function ProductPage({
             <Tab>
               <Img
                 fluid={
-                  product.printfulProduct.productImage.childImageSharp.fluid
+                  product.printfulProduct.productImage
+                    ? product.printfulProduct.productImage.childImageSharp.fluid
+                    : null
                 }
                 alt={product.name}
                 title={product.name}
                 style={{ borderRadius: 4, height: 64, width: 96 }}
               />
             </Tab>
+            {product.images &&
+              product.images.map(image => (
+                <Tab key={image.handle}>
+                  <Image
+                    src={`https://media.graphcms.com/${image.handle}`}
+                    borderRadius='md'
+                    h={16}
+                    maxW={16}
+                  />
+                </Tab>
+              ))}
           </TabList>
         </Tabs>
 
         <Stack spacing={4}>
-          <Heading as="h1">{product.name}</Heading>
+          <Heading as='h1'>{product.name}</Heading>
 
           <Text>{activeVariant && activeVariant.formattedPrice}</Text>
 
           {product.description && <Text>{product.description.markdown}</Text>}
-          <FormLabel htmlFor="style">
+          <FormLabel htmlFor='style'>
             Size
             <Select
-              id="style"
+              id='style'
               value={activeVariantId}
-              onChange={({ target: { value } }) => setActiveVariantId(value)}
-            >
+              onChange={({ target: { value } }) => setActiveVariantId(value)}>
               {variants.map((variant, index) => (
                 <option key={index} value={variant.id}>
                   {variant.splitName}
@@ -123,15 +147,14 @@ function ProductPage({
               ))}
             </Select>
           </FormLabel>
-          <FormLabel htmlFor="quantity">
+          <FormLabel htmlFor='quantity'>
             Quantity
             <Select
-              id="quantity"
+              id='quantity'
               value={variantQuantity}
               onChange={({ target: { value } }) =>
                 setVariantQuantity(parseInt(value))
-              }
-            >
+              }>
               {new Array(5)
                 .fill(0)
                 .map((v, k) => k + 1)
@@ -156,8 +179,7 @@ function ProductPage({
                 variantQuantity
               )
             }
-            disabled={!activeVariant}
-          >
+            disabled={!activeVariant}>
             Add to cart
           </Button>
         </Stack>
@@ -177,6 +199,12 @@ export const pageQuery = graphql`
           markdown
         }
         name
+        images {
+          id
+          width
+          height
+          handle
+        }
         printfulProductId
         printfulProduct {
           productImage {
