@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useCart } from "react-use-cart";
 import { navigate } from "gatsby";
 import { CheckoutProvider } from "../context/checkout";
-import CheckoutForm from "../components/CheckoutForm";
+import CheckoutForm from "../components/CheckoutForm/checkoutForm";
 import CheckoutItemList from "./checkoutItemList";
 import { Grid } from "@chakra-ui/core";
 
@@ -12,7 +12,7 @@ function Checkout() {
   useEffect(() => {
     if (isEmpty) {
       const navigateTimer = setTimeout(() => {
-        navigate(`/cart`);
+        navigate(`/`);
       }, 3000);
 
       return () => clearTimeout(navigateTimer);
