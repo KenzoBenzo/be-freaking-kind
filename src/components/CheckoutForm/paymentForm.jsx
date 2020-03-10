@@ -27,11 +27,13 @@ function PaymentForm() {
   return (
     <div>
       <div>
-        <Heading as="h3" mt={6}>
+        <Heading as='h3' mt={6}>
           Pay
         </Heading>
         {!allowPayment && (
-          <p>You must calculate shipping totals before proceeding to payment</p>
+          <Text>
+            You must calculate shipping totals before proceeding to payment
+          </Text>
         )}
       </div>
       {allowPayment && (
@@ -40,6 +42,7 @@ function PaymentForm() {
 
           <div>
             <CardElement
+              style={{ borderColor: "gray.200", borderRadius: "md" }}
               options={{ hidePostalCode: true }}
               disabled={checkoutProcessing}
               onChange={handleStripeChange}
@@ -47,21 +50,21 @@ function PaymentForm() {
             />
 
             {errors.stripe && (
-              <React.Fragment>
-                <ErrorMessage as={<p />} name="stripe" errors={errors} />
-              </React.Fragment>
+              <>
+                <ErrorMessage as={<p />} name='stripe' errors={errors} />
+              </>
             )}
           </div>
 
-          {checkoutError && <Text color="red.500">{checkoutError}</Text>}
+          {checkoutError && <Text color='red.500'>{checkoutError}</Text>}
           {checkoutProcessing && "Please wait. Processing order."}
           {checkoutSuccess && "Order successfully received."}
           <div>
             <Button
-              type="submit"
+              type='submit'
+              variantColor='red'
               isLoading={checkoutProcessing}
-              isDisabled={checkoutProcessing}
-            >
+              isDisabled={checkoutProcessing}>
               Pay for order
             </Button>
           </div>

@@ -40,9 +40,9 @@ function ShippingForm() {
           isDisabled={disableInput}
           ref={register({ required: "Shipping name is required" })}
         />
-        {/* <FormErrorMessage>
+        <FormErrorMessage>
           {errors.name && errors.name.message}
-        </FormErrorMessage> */}
+        </FormErrorMessage>
       </FormControl>
 
       <FormControl>
@@ -65,10 +65,10 @@ function ShippingForm() {
       </FormControl>
 
       <FormControl>
+        <FormLabel htmlFor='phoneNumber'>Contact Number</FormLabel>
         <Input
           name='phone'
           type='tel'
-          placeholder='Contact no.'
           isDisabled={disableInput}
           register={register}
         />

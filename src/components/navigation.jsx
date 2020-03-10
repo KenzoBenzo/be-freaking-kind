@@ -38,26 +38,24 @@ const Navigation = () => {
         py={4}
         px={[4, 4, 4, 8]}
         isInline
-        justifyContent="space-between"
-        backgroundColor="gray.900"
-        borderRadius="md"
-        mb={6}
-      >
-        <Link to="/">
-          <Icon name="Logo" color="white" h={10} w="auto" />
+        justifyContent='space-between'
+        backgroundColor='gray.900'
+        borderRadius='md'
+        mb={6}>
+        <Link to='/'>
+          <Icon name='Logo' color='white' h={10} w='auto' />
         </Link>
 
         <DarkMode>
           <Button
-            leftIcon="bag"
-            variantColor="blue"
-            variant="ghost"
-            fontWeight="medium"
+            leftIcon='bag'
+            variantColor='blue'
+            variant='ghost'
+            fontWeight='medium'
             ref={btnRef}
-            onClick={onOpen}
-          >
+            onClick={onOpen}>
             Cart
-            <Badge variantColor="blue" ml={2} fontSize="0.8">
+            <Badge variantColor='blue' ml={2} fontSize='0.8'>
               {totalItems > 0 ? totalItems : null}
             </Badge>
           </Button>
@@ -66,65 +64,60 @@ const Navigation = () => {
       <DarkMode>
         <Drawer
           isOpen={isOpen}
-          placement="right"
+          placement='right'
           finalFocusRef={btnRef}
           onClose={onClose}
-          backgroundColor="gray.900"
-          overflow="scroll"
-          size="md"
-          zIndex="2"
-        >
+          backgroundColor='gray.900'
+          overflow='scroll'
+          size='md'
+          zIndex='2'>
           <DrawerHeader
-            backgroundColor="gray.900"
-            color="white"
-            pos="sticky"
-            top="0"
-            zIndex="2"
-            display="flex"
-          >
-            <DrawerCloseButton onClick={onClose} pos="absolute" />
-            <Heading as="h2" fontSize="2xl" mr={4}>
+            backgroundColor='gray.900'
+            color='white'
+            pos='sticky'
+            top='0'
+            zIndex='2'
+            display='flex'>
+            <DrawerCloseButton onClick={onClose} pos='absolute' />
+            <Heading as='h2' fontSize='2xl' mr={4}>
               Cart
             </Heading>
-            <Badge variantColor="teal" fontSize="xl">
+            <Badge variantColor='teal' fontSize='xl'>
               {totalItems > 0 ? totalItems : "0"}
             </Badge>
-            <Text ml={2}>items</Text>
-            <Divider borderColor="gray.800" />
+            <Text ml={2}>item{totalItems === 1 ? null : "s"}</Text>
+            <Divider borderColor='gray.800' />
           </DrawerHeader>
 
-          <DrawerBody backgroundColor="gray.900">
+          <DrawerBody backgroundColor='gray.900'>
             <Stack spacing={4}>{items.map(CartItem)}</Stack>
           </DrawerBody>
 
           <DrawerFooter
-            backgroundColor="gray.900"
-            pos="sticky"
-            bottom="0"
-            w="100%"
-          >
+            backgroundColor='gray.900'
+            pos='sticky'
+            bottom='0'
+            w='100%'>
             <Stack>
-              <Stat p={0} color="white" textAlign="right">
+              <Stat p={0} color='white' textAlign='right'>
                 <StatLabel>Sub total</StatLabel>
                 <StatNumber>{isEmpty ? "-" : formattedSubTotal}</StatNumber>
               </Stat>
-              <Divider color="gray.800" />
+              <Divider color='gray.800' />
               <Stack isInline mt={4}>
                 <Button
-                  variant="outline"
+                  variant='outline'
                   mr={3}
                   onClick={async () => emptyCart()}
-                  isDisabled={isEmpty}
-                >
+                  isDisabled={isEmpty}>
                   Clear cart
                 </Button>
                 <LightMode>
-                  <Link to="/checkout" onClick={onClose}>
+                  <Link to='/checkout' onClick={onClose}>
                     <Button
-                      variantColor="red"
-                      fontWeight="600"
-                      isDisabled={isEmpty}
-                    >
+                      variantColor='red'
+                      fontWeight='600'
+                      isDisabled={isEmpty}>
                       Checkout
                     </Button>
                   </Link>

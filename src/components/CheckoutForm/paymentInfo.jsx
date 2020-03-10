@@ -1,15 +1,14 @@
 import React from "react";
+import { Code, Text } from "@chakra-ui/core";
 
 function PaymentInfo() {
   return (
-    <div>
-      <p>
-        This is a <strong>test checkout</strong>. You can simulate transactions
-        using any valid expiry date, CVC code and{" "}
-        <code>4242 4242 4242 4242</code>, or <code>4000 0000 0000 3220</code> if
-        you want trigger 3D Secure 2 authentication.
-      </p>
-    </div>
+    <Text>
+      This is a <Text as='strong'>test checkout</Text>. You can simulate
+      transactions using any valid expiry date, CVC code and{" "}
+      <Code>4242 4242 4242 4242</Code>, or <Code>4000 0000 0000 3220</Code> if
+      you want trigger 3D Secure 2 authentication.
+    </Text>
   );
 }
 
