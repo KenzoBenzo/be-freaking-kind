@@ -42,8 +42,26 @@ function PaymentForm() {
 
           <div>
             <CardElement
-              style={{ borderColor: "gray.200", borderRadius: "md" }}
-              options={{ hidePostalCode: true }}
+              options={{
+                hidePostalCode: true,
+                style: {
+                  base: {
+                    backgroundColor: "white",
+                    border: "1px solid gray.200",
+                    borderColor: "gray.200",
+                    borderRadius: "md",
+                    padding: "4px",
+                    paddingRight: "16px",
+                    width: "100%",
+                    "::placeholder": {
+                      borderColor: "teal.500"
+                    }
+                  },
+                  invalid: {
+                    color: "#9e2146"
+                  }
+                }
+              }}
               disabled={checkoutProcessing}
               onChange={handleStripeChange}
               onReady={el => setValue("cardElement", el)}

@@ -100,7 +100,7 @@ const Navigation = () => {
             w='100%'>
             <Stack>
               <Stat p={0} color='white' textAlign='right'>
-                <StatLabel>Sub total</StatLabel>
+                <StatLabel>Subtotal</StatLabel>
                 <StatNumber>{isEmpty ? "-" : formattedSubTotal}</StatNumber>
               </Stat>
               <Divider color='gray.800' />

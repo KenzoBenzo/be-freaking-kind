@@ -25,13 +25,12 @@ function CartItem({ id, name, quantity, price, image }) {
   return (
     <Stack
       key={id}
-      backgroundColor="gray.800"
+      backgroundColor='gray.800'
       p={4}
-      borderRadius="md"
+      borderRadius='md'
       isInline
-      align="center"
-      justify="space-between"
-    >
+      align='center'
+      justify='space-between'>
       <Img
         fluid={image.childImageSharp.fluid}
         alt={name}
@@ -39,36 +38,36 @@ function CartItem({ id, name, quantity, price, image }) {
         style={{ height: 64, width: 64, borderRadius: 4 }}
       />
       <Box ml={4}>
-        <Heading as="h4" color="white" fontSize="sm" mb={2}>
+        <Heading as='h4' color='white' fontSize='sm' mb={2}>
           {name}
         </Heading>
         {quantity > 1 ? (
-          <Text color="white" fontSize="sm">
+          <Text color='white' fontSize='sm'>
             {formattedUnitPrice} /each
           </Text>
         ) : (
-          <Text color="white" fontSize="sm">
+          <Text color='white' fontSize='sm'>
             {formattedLineTotal}
           </Text>
         )}
-        <Text onClick={remove} color="red.200" fontSize="sm" cursor="pointer">
+        <Text onClick={remove} color='red.200' fontSize='sm' cursor='pointer'>
           Remove
         </Text>
       </Box>
-      <Stack spacing={2} justify="center" textAlign="center">
+      <Stack spacing={2} justify='center' textAlign='center'>
         <IconButton
-          icon="chevron-up"
-          size="xs"
-          variant="ghost"
+          icon='chevron-up'
+          size='xs'
+          variant='ghost'
           onClick={increment}
         />
-        <Text color="white" fontSize="sm">
+        <Text color='white' fontSize='sm'>
           {quantity}
         </Text>
         <IconButton
-          icon="chevron-down"
-          size="xs"
-          variant="ghost"
+          icon='chevron-down'
+          size='xs'
+          variant='ghost'
           onClick={decrement}
           isDisabled={quantity <= 1 ? true : false}
         />
