@@ -46,15 +46,14 @@ function PaymentForm() {
                 hidePostalCode: true,
                 style: {
                   base: {
-                    backgroundColor: "white",
-                    border: "1px solid gray.200",
-                    borderColor: "gray.200",
-                    borderRadius: "md",
+                    backgroundColor: "#fff",
+                    border: "1px solid #CBD2D9",
+                    borderRadius: "4px",
                     padding: "4px",
-                    paddingRight: "16px",
+                    paddingRight: "8px",
                     width: "100%",
-                    "::placeholder": {
-                      borderColor: "teal.500"
+                    "::focus": {
+                      borderColor: "#30FFE0"
                     }
                   },
                   invalid: {
