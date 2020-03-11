@@ -31,7 +31,7 @@ function ShippingForm() {
   const disableInput = allowPayment || checkoutProcessing;
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={4} mb={4}>
       <Heading as='h3'>Shipping</Heading>
 
       <FormControl>
@@ -122,7 +122,7 @@ function ShippingForm() {
         </FormControl>
 
         <FormControl>
-          <FormLabel htmlFor='zipcode'>ZIP / Postcode</FormLabel>
+          <FormLabel htmlFor='zipcode'>Zipcode</FormLabel>
           <Input
             name='shipping.zip'
             size='sm'

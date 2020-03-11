@@ -11,8 +11,15 @@ function PaymentForm() {
     allowPayment,
     error: checkoutError,
     processing: checkoutProcessing,
-    success: checkoutSuccess
+    success: checkoutSuccess,
+    orderTotal
   } = useContext(CheckoutContext);
+
+  const formatValue = value =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD"
+    }).format(value / 100);
 
   useEffect(() => {
     if (allowPayment)
@@ -35,15 +42,15 @@ function PaymentForm() {
         </Text>
       )}
       {allowPayment && (
-        <React.Fragment>
+        <>
           <PaymentInfo />
 
           <Box
             my={4}
             border='1px solid'
             borderColor='gray.200'
-            borderRadius='md'
-            py='11px'
+            borderRadius='sm'
+            py='7px'
             px='8px'
             w='100%'>
             <CardElement
@@ -68,12 +75,12 @@ function PaymentForm() {
               type='submit'
               variantColor='red'
               isLoading={checkoutProcessing}
-              loadingText='Paying'
+              loadingText='Processing payment'
               isDisabled={checkoutProcessing}>
-              Pay for order
+              Pay {formatValue(orderTotal)}
             </Button>
           </div>
-        </React.Fragment>
+        </>
       )}
     </Stack>
   );

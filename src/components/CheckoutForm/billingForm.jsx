@@ -89,7 +89,7 @@ function BillingForm() {
         </FormControl>
 
         <FormControl>
-          <FormLabel htmlFor='zipcode'>ZIP / Postcode</FormLabel>
+          <FormLabel htmlFor='zipcode'>Zipcode</FormLabel>
           <Input
             name='billing.zip'
             size='sm'

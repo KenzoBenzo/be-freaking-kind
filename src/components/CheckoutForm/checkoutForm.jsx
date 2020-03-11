@@ -40,10 +40,10 @@ function CheckoutForm() {
     defaultValues: {
       separateBilling: false,
       billing: {
-        country: "DE"
+        country: "US"
       },
       shipping: {
-        country: "DE"
+        country: "US"
       }
     }
   });
