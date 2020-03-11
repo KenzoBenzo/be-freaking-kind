@@ -16,9 +16,9 @@ function CheckoutItemList() {
   const { orderTotal, shipping, tax } = useContext(CheckoutContext);
 
   const formatValue = value =>
-    new Intl.NumberFormat("de-DE", {
+    new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "EUR"
+      currency: "USD"
     }).format(value / 100);
 
   return (

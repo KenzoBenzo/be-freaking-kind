@@ -17,7 +17,8 @@ import {
   TabPanels,
   TabList,
   Stack,
-  Image
+  Image,
+  StatNumber
 } from "@chakra-ui/core";
 // import ReviewsList from "../components/ReviewsList";
 import SEO from "../components/SEO";
@@ -56,7 +57,13 @@ function ProductPage({
         }
       />
 
-      <Grid templateColumns='repeat(2, 2fr)' gap={8}>
+      <Grid
+        templateColumns={[
+          "repeat(auto-fill, 2fr)",
+          "repeat(auto-fill, 2fr)",
+          "repeat(2, 2fr)"
+        ]}
+        gap={16}>
         <Tabs variant='line' borderBottomColor='gray.50'>
           <TabPanels>
             <TabPanel>
@@ -64,7 +71,7 @@ function ProductPage({
                 fluid={activeVariant.variantImage.childImageSharp.fluid}
                 alt={product.name}
                 title={product.name}
-                style={{ borderRadius: 4 }}
+                style={{ borderRadius: 4, maxHeight: 400 }}
               />
             </TabPanel>
             <TabPanel>
@@ -74,7 +81,7 @@ function ProductPage({
                 }
                 alt={product.name}
                 title={product.name}
-                style={{ borderRadius: 4 }}
+                style={{ borderRadius: 4, maxHeight: 400 }}
               />
             </TabPanel>
             {product.images &&
@@ -84,6 +91,7 @@ function ProductPage({
                     src={`https://media.graphcms.com/${image.handle}`}
                     borderRadius='md'
                     h='100%'
+                    maxH='400px'
                     m='0 auto'
                   />
                 </TabPanel>
@@ -92,11 +100,7 @@ function ProductPage({
           <TabList>
             <Tab>
               <Img
-                fluid={
-                  activeVariant
-                    ? activeVariant.variantImage.childImageSharp.fluid
-                    : product.printfulProduct.productImage.childImageSharp.fluid
-                }
+                fluid={activeVariant.variantImage.childImageSharp.fluid}
                 alt={product.name}
                 title={product.name}
                 style={{ borderRadius: 4, height: 64, width: 96 }}
@@ -105,9 +109,7 @@ function ProductPage({
             <Tab>
               <Img
                 fluid={
-                  product.printfulProduct.productImage
-                    ? product.printfulProduct.productImage.childImageSharp.fluid
-                    : null
+                  product.printfulProduct.productImage.childImageSharp.fluid
                 }
                 alt={product.name}
                 title={product.name}
@@ -131,42 +133,51 @@ function ProductPage({
         <Stack spacing={4}>
           <Heading as='h1'>{product.name}</Heading>
 
-          <Text>{activeVariant && activeVariant.formattedPrice}</Text>
+          <StatNumber>
+            {activeVariant && activeVariant.formattedPrice}
+          </StatNumber>
 
           {product.description && <Text>{product.description.markdown}</Text>}
-          <FormLabel htmlFor='style'>
-            Size
-            <Select
-              id='style'
-              value={activeVariantId}
-              onChange={({ target: { value } }) => setActiveVariantId(value)}>
-              {variants.map((variant, index) => (
-                <option key={index} value={variant.id}>
-                  {variant.splitName}
-                </option>
-              ))}
-            </Select>
-          </FormLabel>
-          <FormLabel htmlFor='quantity'>
-            Quantity
-            <Select
-              id='quantity'
-              value={variantQuantity}
-              onChange={({ target: { value } }) =>
-                setVariantQuantity(parseInt(value))
-              }>
-              {new Array(5)
-                .fill(0)
-                .map((v, k) => k + 1)
-                .map(i => ({ value: i, label: i }))
-                .map(({ value, label }) => (
-                  <option key={value} value={value}>
-                    {label}
+          <Stack isInline spacing={4} alignItems='flex-end'>
+            <FormLabel htmlFor='style' w='100%'>
+              Size
+              <Select
+                id='style'
+                size='sm'
+                value={activeVariantId}
+                onChange={({ target: { value } }) => setActiveVariantId(value)}>
+                {variants.map((variant, index) => (
+                  <option key={index} value={variant.id}>
+                    {variant.splitName}
                   </option>
                 ))}
-            </Select>
-          </FormLabel>
+              </Select>
+            </FormLabel>
+            <FormLabel htmlFor='quantity' w='100%' pr={0}>
+              Quantity
+              <Select
+                id='quantity'
+                size='sm'
+                value={variantQuantity}
+                onChange={({ target: { value } }) =>
+                  setVariantQuantity(parseInt(value))
+                }>
+                {new Array(5)
+                  .fill(0)
+                  .map((v, k) => k + 1)
+                  .map(i => ({ value: i, label: i }))
+                  .map(({ value, label }) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+              </Select>
+            </FormLabel>
+          </Stack>
           <Button
+            w='100%'
+            variantColor='red'
+            fontWeight='600'
             onClick={() =>
               addItem(
                 {
@@ -209,7 +220,7 @@ export const pageQuery = graphql`
         printfulProduct {
           productImage {
             childImageSharp {
-              fluid(maxWidth: 560) {
+              fluid(maxWidth: 500) {
                 ...GatsbyImageSharpFluid
               }
             }
@@ -222,7 +233,7 @@ export const pageQuery = graphql`
             splitName
             variantImage {
               childImageSharp {
-                fluid(maxWidth: 560) {
+                fluid(maxWidth: 500) {
                   ...GatsbyImageSharpFluid
                 }
               }

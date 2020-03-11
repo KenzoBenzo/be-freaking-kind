@@ -12,14 +12,14 @@ function CartItem({ id, name, quantity, price, image }) {
 
   const total = quantity * price;
 
-  const formattedUnitPrice = new Intl.NumberFormat("de-DE", {
+  const formattedUnitPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "EUR"
+    currency: "USD"
   }).format(price / 100);
 
-  const formattedLineTotal = new Intl.NumberFormat("de-DE", {
+  const formattedLineTotal = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "EUR"
+    currency: "USD"
   }).format(total / 100);
 
   return (

@@ -30,9 +30,11 @@ function SuccessPage({ location }) {
       <SEO pageTitle='Success' />
       <Hero text='Thank you for your order!' />
 
-      <Text textAlign='center'>
+      <Text textAlign='center' fontSize='lg'>
         Please take note of your order reference for your records:{" "}
-        <Code variantColor='blue'>{location.state.orderId}</Code>
+        <Code variantColor='blue' fontSize='lg'>
+          {location.state.orderId}
+        </Code>
       </Text>
     </>
   );

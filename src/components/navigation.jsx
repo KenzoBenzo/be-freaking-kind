@@ -28,9 +28,9 @@ const Navigation = () => {
   const { totalItems, items, cartTotal, emptyCart, isEmpty } = useCart();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const formattedSubTotal = new Intl.NumberFormat("de-DE", {
+  const formattedSubTotal = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "EUR"
+    currency: "USD"
   }).format(cartTotal / 100);
   return (
     <>
