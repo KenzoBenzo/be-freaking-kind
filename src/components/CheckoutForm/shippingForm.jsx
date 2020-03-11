@@ -9,7 +9,8 @@ import {
   Stack,
   FormLabel,
   FormControl,
-  FormErrorMessage
+  FormErrorMessage,
+  Checkbox
 } from "@chakra-ui/core";
 import usePrintfulShippingCountries from "../../hooks/usePrintfulShippingCountries";
 
@@ -180,18 +181,21 @@ function ShippingForm() {
       </Stack>
 
       {!allowPayment && (
-        <Stack isInline justify='space-between'>
+        <Stack
+          direction={["column", "column", "column", "row"]}
+          justify='space-between'
+          spacing={4}>
           <Button
             type='submit'
+            size='sm'
             isLoading={checkoutProcessing}
             loadingText='Calculating'
             isDisabled={disableInput}>
             Calculate shipping
           </Button>
           <FormLabel display='flex' alignItems='center'>
-            <Input
+            <Checkbox
               name='separateBilling'
-              type='checkbox'
               isDisabled={disableInput}
               ref={register}
               w={6}

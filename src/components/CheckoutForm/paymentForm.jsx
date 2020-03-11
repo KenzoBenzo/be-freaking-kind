@@ -74,6 +74,7 @@ function PaymentForm() {
             <Button
               type='submit'
               variantColor='red'
+              fontWeight={600}
               isLoading={checkoutProcessing}
               loadingText='Processing payment'
               isDisabled={checkoutProcessing}>
