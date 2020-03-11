@@ -6,8 +6,9 @@ function PaymentInfo() {
     <Text>
       This is a <Text as='strong'>test checkout</Text>. You can simulate
       transactions using any valid expiry date, CVC code and{" "}
-      <Code>4242 4242 4242 4242</Code>, or <Code>4000 0000 0000 3220</Code> if
-      you want trigger 3D Secure 2 authentication.
+      <Code variantColor='blue'>4242 4242 4242 4242</Code>, or{" "}
+      <Code variantColor='blue'>4000 0000 0000 3220</Code> if you want trigger
+      3D Secure 2 authentication.
     </Text>
   );
 }

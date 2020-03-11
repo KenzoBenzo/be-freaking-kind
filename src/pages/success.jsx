@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { navigate } from "gatsby";
 import SEO from "../components/SEO";
 import { Hero } from "../components/hero";
+import { Text, Code } from "@chakra-ui/core";
 
 function SuccessPage({ location }) {
   const showSuccessScreen = location.state && location.state.orderId;
@@ -19,20 +20,20 @@ function SuccessPage({ location }) {
   if (!showSuccessScreen)
     return (
       <>
-        <Hero text="Oops!" />
-        <p>You've no business being on this page!</p>
+        <Hero text='Oops!' />
+        <Text textAlign='center'>You've no business being on this page!</Text>
       </>
     );
 
   return (
     <>
-      <SEO pageTitle="Thank you for your order" />
-      <Hero text="Thanks!" />
+      <SEO pageTitle='Success' />
+      <Hero text='Thank you for your order!' />
 
-      <p>
+      <Text textAlign='center'>
         Please take note of your order reference for your records:{" "}
-        <span>{location.state.orderId}</span>
-      </p>
+        <Code variantColor='blue'>{location.state.orderId}</Code>
+      </Text>
     </>
   );
 }

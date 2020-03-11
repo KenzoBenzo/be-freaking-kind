@@ -4,7 +4,7 @@ import { navigate } from "gatsby";
 import { CheckoutProvider } from "../context/checkout";
 import CheckoutForm from "../components/CheckoutForm/checkoutForm";
 import CheckoutItemList from "./checkoutItemList";
-import { Grid } from "@chakra-ui/core";
+import { Grid, Text } from "@chakra-ui/core";
 
 function Checkout() {
   const { isEmpty } = useCart();
@@ -13,13 +13,13 @@ function Checkout() {
     if (isEmpty) {
       const navigateTimer = setTimeout(() => {
         navigate(`/`);
-      }, 3000);
+      }, 2000);
 
       return () => clearTimeout(navigateTimer);
     }
   }, [isEmpty]);
 
-  if (isEmpty) return <p>Your cart is empty</p>;
+  if (isEmpty) return <Text textAlign='center'>Your cart is empty.</Text>;
 
   return (
     <CheckoutProvider>

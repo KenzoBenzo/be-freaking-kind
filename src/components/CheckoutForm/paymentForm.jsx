@@ -61,13 +61,14 @@ function PaymentForm() {
           </Box>
 
           {checkoutError && <Text color='red.500'>{checkoutError}</Text>}
-          {checkoutProcessing && "Please wait. Processing order."}
-          {checkoutSuccess && "Order successfully received."}
+          {checkoutProcessing && <Text>Please wait. Processing order.</Text>}
+          {checkoutSuccess && <Text>Order successfully received.</Text>}
           <div>
             <Button
               type='submit'
               variantColor='red'
               isLoading={checkoutProcessing}
+              loadingText='Paying'
               isDisabled={checkoutProcessing}>
               Pay for order
             </Button>

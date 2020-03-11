@@ -184,6 +184,7 @@ function ShippingForm() {
           <Button
             type='submit'
             isLoading={checkoutProcessing}
+            loadingText='Calculating'
             isDisabled={disableInput}>
             Calculate shipping
           </Button>
