@@ -20,6 +20,7 @@ function SuccessPage({ location }) {
   if (!showSuccessScreen)
     return (
       <>
+        <SEO pageTitle='Oops!' />
         <Hero text='Oops!' />
         <Text textAlign='center'>You've no business being on this page!</Text>
       </>

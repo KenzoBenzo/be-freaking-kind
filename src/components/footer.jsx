@@ -7,26 +7,25 @@ const Footer = () => {
     <Flex
       p={4}
       isInline
-      justify="center"
-      backgroundColor="gray.900"
-      borderRadius="md"
-      mt={10}
-    >
-      <Link to="/FAQ/">
+      justify='center'
+      backgroundColor='gray.900'
+      borderRadius='md'
+      mt={10}>
+      <Link to='/faq/'>
         <DarkMode>
-          <Button variant="ghost">FAQ</Button>
+          <Button variant='ghost'>FAQ</Button>
         </DarkMode>
       </Link>
-      <Link to="/Shipping/">
+      <Link to='/shipping/'>
         <DarkMode>
-          <Button variant="ghost" mx={4}>
+          <Button variant='ghost' mx={4}>
             Shipping
           </Button>
         </DarkMode>
       </Link>
-      <Link to="/Contact/">
+      <Link to='/contact/'>
         <DarkMode>
-          <Button variant="ghost">Contact</Button>
+          <Button variant='ghost'>Contact</Button>
         </DarkMode>
       </Link>
     </Flex>

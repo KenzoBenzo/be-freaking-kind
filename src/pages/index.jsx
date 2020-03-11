@@ -2,6 +2,7 @@ import React from "react";
 import ProductGrid from "../components/productGrid";
 import { Hero } from "../components/hero";
 import { graphql } from "gatsby";
+import SEO from "../components/SEO";
 
 function IndexPage({
   data: {
@@ -10,6 +11,7 @@ function IndexPage({
 }) {
   return (
     <>
+      <SEO pageTitle='Home' />
       <Hero text='Just be fucking kind.' />
       <ProductGrid products={products} />
     </>
