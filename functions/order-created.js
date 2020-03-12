@@ -17,7 +17,7 @@ exports.handler = async event => {
 
   const msg = {
     to: email,
-    from: SENDGRID_OWNER_EMAIL,
+    from: process.env.SENDGRID_OWNER_EMAIL,
     templateId: process.env.SENDGRID_ORDER_CREATED_ID,
     dynamic_template_data: {
       orderID: id,
