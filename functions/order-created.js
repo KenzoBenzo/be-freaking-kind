@@ -1,59 +1,30 @@
-require("dotenv").config();
-
-const { ServerClient: PostmarkClient } = require("postmark");
-
-const postmark = new PostmarkClient(process.env.POSTMARK_API_KEY);
+const { SENDGRID_API_KEY, SENDGRID_OWNER_EMAIL } = process.env;
+const sgMail = require("@sendgrid/mail");
 
 exports.handler = async event => {
   const {
-    info: { fieldName, responseData }
+    info: { responseData }
   } = JSON.parse(event.body);
 
-  if (fieldName !== "createOrder")
-    return {
-      statusCode: 422,
-      body: JSON.stringify({
-        message: "No action required."
-      })
-    };
+  sgMail.setApiKey(SENDGRID_API_KEY);
 
   try {
-    const {
-      id,
-      email: to,
-      billingAddress: { name }
-    } = responseData;
-
-    await postmark.sendEmailBatchWithTemplates([
-      {
-        from: process.env.POSTMARK_STORE_OWNER_EMAIL,
-        to: process.env.POSTMARK_STORE_OWNER_EMAIL,
-        TemplateId: process.env.POSTMARK_STORE_OWNER_NEW_ORDER_TEMPLATE_ID,
-        TemplateModel: {
-          id,
-          name
-        }
-      },
-      {
-        from: process.env.POSTMARK_STORE_OWNER_EMAIL,
-        to,
-        TemplateId: process.env.POSTMARK_NEW_ORDER_TEMPLATE_ID,
-        TemplateModel: {
-          id,
-          name
-        }
+    const { email, id } = responseData;
+    const msg = {
+      to: email,
+      from: SENDGRID_OWNER_EMAIL,
+      templateId: SENDGRID_ORDER_CREATED_ID,
+      dynamic_template_data: {
+        orderID: id
       }
-    ]);
+    };
+    await sgMail.send(msg);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        message: "Email(s) sent successfully."
-      })
+      body: "Message sent"
     };
-  } catch (err) {
-    console.log(err);
-
+  } catch (error) {
     return {
       statusCode: 500,
       body: JSON.stringify(err)
