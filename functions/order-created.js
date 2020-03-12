@@ -2,6 +2,8 @@ require("dotenv").config();
 
 const sgMail = require("@sendgrid/mail");
 
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 exports.handler = async event => {
   const {
     info: {
@@ -13,18 +15,17 @@ exports.handler = async event => {
     }
   } = JSON.parse(event.body);
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const msg = {
+    to: email,
+    from: SENDGRID_OWNER_EMAIL,
+    templateId: process.env.SENDGRID_ORDER_CREATED_ID,
+    dynamic_template_data: {
+      orderID: id,
+      name
+    }
+  };
 
   try {
-    const msg = {
-      to: email,
-      from: SENDGRID_OWNER_EMAIL,
-      templateId: process.env.SENDGRID_ORDER_CREATED_ID,
-      dynamic_template_data: {
-        orderID: id,
-        name: name
-      }
-    };
     await sgMail.send(msg);
 
     return {
