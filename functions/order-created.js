@@ -5,17 +5,24 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.handler = async event => {
-  console.log(event);
-  let body = JSON.parse(event.body);
-  console.log(body);
+  const {
+    info: {
+      responseData: {
+        id,
+        email,
+        billingAddress: { name }
+      }
+    }
+  } = JSON.parse(event.body);
+  console.log(info);
 
   const msg = {
-    to: body.email,
+    to: email,
     from: process.env.SENDGRID_OWNER_EMAIL,
     templateId: process.env.SENDGRID_ORDER_CREATED_ID,
     dynamic_template_data: {
-      orderID: body.id,
-      name: body.name
+      orderID: id,
+      name: name
     }
   };
 
