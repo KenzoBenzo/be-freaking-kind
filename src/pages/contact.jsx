@@ -3,10 +3,7 @@ import {
   FormLabel,
   Input,
   Textarea,
-  InputGroup,
-  InputLeftAddon,
   Button,
-  LightMode,
   Box,
   FormControl
 } from "@chakra-ui/core";

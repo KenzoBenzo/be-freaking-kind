@@ -4,7 +4,9 @@ module.exports = {
   siteMetadata: {
     title: `Be Freaking Kind store`,
     description: `A t-shirt store encouraging people to be kind.`,
-    siteUrl: `https://befreakingkind.com`
+    author: `Makenna Smutz <makennasmutz@gmail.com>`,
+    siteUrl: `https://befreakingkind.com`,
+    ogImage: ``
   },
   plugins: [
     {
@@ -34,6 +36,15 @@ module.exports = {
       }
     },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-react-helmet`
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `be-freaking-kind`,
+        start_url: `/`,
+        theme_color: `#FF304F`,
+        icon: `src/static/BFK-FAVICON.png` // This path is relative to the root of the site.
+      }
+    }
   ]
 };
