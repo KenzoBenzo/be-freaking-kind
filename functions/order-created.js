@@ -4,17 +4,9 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-exports.handler = async event => {
-  const {
-    info: {
-      responseData: {
-        id,
-        email,
-        billingAddress: { name }
-      }
-    }
-  } = JSON.parse(event.body);
-  console.log(info);
+exports.handler = async ({ event, context, callback }) => {
+  let body = JSON.parse(event.body);
+  console.log(body);
 
   const msg = {
     to: email,
@@ -27,7 +19,12 @@ exports.handler = async event => {
   };
 
   try {
-    await sgMail.send(msg);
+    await sgMail.send(msg).then(() => {
+      console.log(
+        `Contact form sent from: ${process.env.SENDGRID_OWNER_EMAIL}, to: ${body.email}, with name: ${body.name}`
+      );
+      callback();
+    });
 
     return {
       statusCode: 200,
