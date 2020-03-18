@@ -32,6 +32,7 @@ const Navigation = () => {
     style: "currency",
     currency: "USD"
   }).format(cartTotal / 100);
+
   return (
     <>
       <Flex
@@ -70,7 +71,8 @@ const Navigation = () => {
           backgroundColor='gray.900'
           overflow='scroll'
           size='md'
-          zIndex='2'>
+          zIndex='2'
+          isFullHeight>
           <DrawerHeader
             backgroundColor='gray.900'
             color='white'

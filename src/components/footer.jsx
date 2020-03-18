@@ -10,7 +10,11 @@ const Footer = () => {
       justify='center'
       backgroundColor='gray.900'
       borderRadius='md'
-      mt={10}>
+      position='absolute'
+      left={[4, 4, 8, 12]}
+      right={[4, 4, 8, 12]}
+      bottom={4}
+      w='auto'>
       <Link to='/faq/'>
         <DarkMode>
           <Button variant='ghost'>FAQ</Button>
