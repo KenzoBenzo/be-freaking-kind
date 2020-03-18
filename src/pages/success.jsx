@@ -28,7 +28,10 @@ function SuccessPage({ location }) {
 
   return (
     <>
-      <SEO pageTitle='Success' />
+      <SEO
+        pageTitle='Success'
+        pageDescription="You've successfully submitted your order! Congrats, and thank you for being kind."
+      />
       <Hero text='Thank you for your order!' />
 
       <Text textAlign='center' fontSize='lg'>

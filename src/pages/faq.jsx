@@ -7,8 +7,11 @@ import { Grid } from "@chakra-ui/core";
 const FAQPage = () => {
   return (
     <>
-      <SEO pageTitle='FAQ' />
-      <Hero text='FAQ' />
+      <SEO
+        pageTitle='FAQ'
+        pageDescription="Any and all questions regarding BeFreakingKind, it's website and products. If your question is not answered, please use the contact form."
+      />
+      <Hero text='FAQ.' />
       <Grid
         templateColumns={["auto-fill", "auto-fill", "repeat(2, 1fr)"]}
         gap={6}>

@@ -52,6 +52,7 @@ function ProductPage({
     <>
       <SEO
         pageTitle={product.name}
+        pageDescription={product.description.text.substring(0, 260)}
         image={
           activeVariant
             ? activeVariant.variantImage.childImageSharp.fluid.src
@@ -213,6 +214,7 @@ export const pageQuery = graphql`
         id
         description {
           markdown
+          text
         }
         name
         images {
