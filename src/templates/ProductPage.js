@@ -18,7 +18,8 @@ import {
   TabList,
   Stack,
   Image,
-  StatNumber
+  StatNumber,
+  useToast
 } from "@chakra-ui/core";
 // import ReviewsList from "../components/ReviewsList";
 import SEO from "../components/SEO";
@@ -29,6 +30,7 @@ function ProductPage({
   },
   location
 }) {
+  const toast = useToast();
   const { variantId } = queryString.parse(location.search);
   const { variants } = product.printfulProduct;
   const [firstVariant] = variants;
@@ -50,6 +52,7 @@ function ProductPage({
     <>
       <SEO
         pageTitle={product.name}
+        pageDescription={product.description.text.substring(0, 260)}
         image={
           activeVariant
             ? activeVariant.variantImage.childImageSharp.fluid.src
@@ -178,7 +181,7 @@ function ProductPage({
             w='100%'
             variantColor='red'
             fontWeight='600'
-            onClick={() =>
+            onClick={() => {
               addItem(
                 {
                   id: activeVariant.id,
@@ -188,10 +191,13 @@ function ProductPage({
                   description: product.description.markdown
                 },
                 variantQuantity
-              )
-            }
+              );
+            }}
             disabled={!activeVariant}>
             Add to cart
+          </Button>
+          <Button onClick={() => toast({ title: "I'm a toast" })}>
+            Mr. Toast
           </Button>
         </Stack>
       </Grid>
@@ -208,6 +214,7 @@ export const pageQuery = graphql`
         id
         description {
           markdown
+          text
         }
         name
         images {

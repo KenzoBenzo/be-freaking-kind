@@ -4,7 +4,7 @@ const { ServerClient: PostmarkClient } = require("postmark");
 
 const postmark = new PostmarkClient(process.env.POSTMARK_API_KEY);
 
-exports.handler = async event => {
+exports.handler = async (event, context, callback) => {
   const {
     info: {
       fieldName,

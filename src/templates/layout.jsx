@@ -6,7 +6,13 @@ import Footer from "../components/footer";
 export default function Layout({ children }) {
   return (
     <>
-      <Stack minH='100vh' backgroundColor='white' py={4} px={[4, 4, 8, 12]}>
+      <Stack
+        minH='100vh'
+        backgroundColor='white'
+        pt={4}
+        pb={20}
+        px={[4, 4, 8, 12]}
+        pos='relative'>
         <Navigation />
         {children}
         <Footer />

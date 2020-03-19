@@ -1,62 +1,39 @@
 require("dotenv").config();
 
-const { ServerClient: PostmarkClient } = require("postmark");
+const sgMail = require("@sendgrid/mail");
 
-const postmark = new PostmarkClient(process.env.POSTMARK_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-exports.handler = async event => {
-  const {
-    info: { fieldName, responseData }
-  } = JSON.parse(event.body);
+exports.handler = async ({ event, context, callback }) => {
+  let body = JSON.parse(event.body);
+  console.log(body);
 
-  if (fieldName !== "createOrder")
-    return {
-      statusCode: 422,
-      body: JSON.stringify({
-        message: "No action required."
-      })
-    };
+  const msg = {
+    to: email,
+    from: process.env.SENDGRID_OWNER_EMAIL,
+    templateId: process.env.SENDGRID_ORDER_CREATED_ID,
+    dynamic_template_data: {
+      orderID: id,
+      name: name
+    }
+  };
 
   try {
-    const {
-      id,
-      email: to,
-      billingAddress: { name }
-    } = responseData;
-
-    await postmark.sendEmailBatchWithTemplates([
-      {
-        from: process.env.POSTMARK_STORE_OWNER_EMAIL,
-        to: process.env.POSTMARK_STORE_OWNER_EMAIL,
-        TemplateId: process.env.POSTMARK_STORE_OWNER_NEW_ORDER_TEMPLATE_ID,
-        TemplateModel: {
-          id,
-          name
-        }
-      },
-      {
-        from: process.env.POSTMARK_STORE_OWNER_EMAIL,
-        to,
-        TemplateId: process.env.POSTMARK_NEW_ORDER_TEMPLATE_ID,
-        TemplateModel: {
-          id,
-          name
-        }
-      }
-    ]);
+    await sgMail.send(msg).then(() => {
+      console.log(
+        `Contact form sent from: ${process.env.SENDGRID_OWNER_EMAIL}, to: ${body.email}, with name: ${body.name}`
+      );
+      callback();
+    });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        message: "Email(s) sent successfully."
-      })
+      body: "Message sent"
     };
-  } catch (err) {
-    console.log(err);
-
+  } catch (error) {
     return {
-      statusCode: 500,
-      body: JSON.stringify(err)
+      statusCode: error.code,
+      body: JSON.stringify(error)
     };
   }
 };

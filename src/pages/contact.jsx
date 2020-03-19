@@ -3,10 +3,7 @@ import {
   FormLabel,
   Input,
   Textarea,
-  InputGroup,
-  InputLeftAddon,
   Button,
-  LightMode,
   Box,
   FormControl
 } from "@chakra-ui/core";
@@ -16,7 +13,10 @@ import SEO from "../components/SEO";
 const ContactPage = () => {
   return (
     <>
-      <SEO pageTitle='Contact' />
+      <SEO
+        pageTitle='Contact'
+        pageDescription='Contact the team behind BeFreakingKind through this form. We will be back to you ASAP.'
+      />
       <Hero text='Contact.' />
       <form
         name='contact'

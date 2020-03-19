@@ -10,7 +10,7 @@ const createPaymentIntentResolver = async (
       status
     } = await stripe.paymentIntents.create({
       amount: total,
-      currency: "eur",
+      currency: "USD",
       description,
       metadata,
       receipt_email: email

@@ -11,7 +11,10 @@ function IndexPage({
 }) {
   return (
     <>
-      <SEO pageTitle='Home' />
+      <SEO
+        pageTitle='Home'
+        pageDescription='BeFreakingKind is an apparel company born out of the want to encourage people at the bare minimum, to be good people.'
+      />
       <Hero text='Just be fucking kind.' />
       <ProductGrid products={products} />
     </>
