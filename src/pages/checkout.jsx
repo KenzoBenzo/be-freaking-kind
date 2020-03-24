@@ -5,14 +5,14 @@ import { Hero } from "../components/hero";
 
 function CheckoutPage() {
   return (
-    <React.Fragment>
+    <>
       <SEO
         pageTitle='Checkout'
         pageDescription="You're so close to passing around kindness. All of your order details will be displayed here."
       />
       <Hero text='Checkout.' />
       <Checkout />
-    </React.Fragment>
+    </>
   );
 }
 

@@ -21,7 +21,6 @@ import {
   StatNumber,
   useToast
 } from "@chakra-ui/core";
-// import ReviewsList from "../components/ReviewsList";
 import SEO from "../components/SEO";
 
 function ProductPage({
@@ -192,17 +191,20 @@ function ProductPage({
                 },
                 variantQuantity
               );
+              toast({
+                position: "top-right",
+                title: "Added to cart!",
+                description: `We've added ${activeVariant.name} x${variantQuantity} to your cart.`,
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+              })
             }}
             disabled={!activeVariant}>
             Add to cart
           </Button>
-          <Button onClick={() => toast({ title: "I'm a toast" })}>
-            Mr. Toast
-          </Button>
         </Stack>
       </Grid>
-
-      {/* <ReviewsList productId={product.id} reviews={product.reviews} /> */}
     </>
   );
 }

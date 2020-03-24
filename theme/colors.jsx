@@ -38,7 +38,7 @@ const customColors = {
     800: "#930F48",
     900: "#7A0944"
   },
-  orange: {
+  yellow: {
     50: "#FFF8DF",
     100: "#FFEED5",
     200: "#FFD8AC",

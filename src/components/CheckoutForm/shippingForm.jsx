@@ -181,10 +181,7 @@ function ShippingForm() {
       </Stack>
 
       {!allowPayment && (
-        <Stack
-          direction={["column", "column", "column", "row"]}
-          justify='space-between'
-          spacing={4}>
+        <Stack justify='space-between' spacing={4}>
           <Button
             type='submit'
             size='sm'

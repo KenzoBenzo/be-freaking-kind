@@ -3,24 +3,9 @@ import Layout from "./src/templates/layout";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import customTheme from "./theme/theme";
 import { CartProvider } from "react-use-cart";
-import "react-toastify/dist/ReactToastify.css";
 import "isomorphic-fetch";
-import { ToastContainer } from "react-toastify";
 import { GraphQLClient, ClientContext } from "graphql-hooks";
 import StripeProvider from "./src/components/StripeProvider";
-
-import {
-  handleItemAdded,
-  handleItemUpdated,
-  handleItemRemoved
-} from "./src/utils/cart-helpers";
-
-const toastOptions = {
-  position: "top-right",
-  draggable: false,
-  closeButton: false,
-  autoClose: 2000
-};
 
 const randomCartId = () =>
   Math.random()
@@ -42,14 +27,31 @@ export const wrapRootElement = ({ element }) => {
         <ClientContext.Provider value={client}>
           <CartProvider
             id={randomCartId()}
-            onItemAdd={handleItemAdded}
-            onItemUpdate={handleItemUpdated}
-            onItemRemove={handleItemRemoved}>
+            // onItemAdd={handleItemAdded}
+            // onItemUpdate={() =>
+            //   useToast({
+            //     position: "top-right",
+            //     title: "Success!",
+            //     description: "Item updated!",
+            //     status: "success",
+            //     duration: 5000,
+            //     isClosable: true
+            //   })
+            // }
+            // onItemRemove={() =>
+            // useToast({
+            //   position: "top-right",
+            //   title: "Success!",
+            //   description: "Removed from cart.",
+            //   status: "success",
+            //   duration: 5000,
+            //   isClosable: true
+            // })}
+          >
             <CSSReset />
             {element}
           </CartProvider>
         </ClientContext.Provider>
-        <ToastContainer {...toastOptions} />
       </StripeProvider>
     </ThemeProvider>
   );

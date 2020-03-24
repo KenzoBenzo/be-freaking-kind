@@ -9,9 +9,9 @@
     "prodserve": "gatsby build && gatsby serve"
   },
   "dependencies": {
-    "@chakra-ui/core": "^0.2.8",
-    "@emotion/core": "^10.0.17",
-    "@emotion/styled": "^10.0.17",
+    "@chakra-ui/core": "0.6.1",
+    "@emotion/core": "10.0.28",
+    "@emotion/styled": "10.0.27",
     "@sendgrid/mail": "^6.5.4",
     "@stripe/react-stripe-js": "1.0.0-beta.3",
     "@stripe/stripe-js": "1.0.0-beta.4",
@@ -19,7 +19,7 @@
     "apollo-datasource-rest": "^0.6.9",
     "apollo-server-lambda": "2.9.12",
     "currency-formatter": "1.5.5",
-    "emotion-theming": "^10.0.19",
+    "emotion-theming": "10.0.27",
     "es6-promise": "4.2.8",
     "gatsby": "2.18.12",
     "gatsby-image": "^2.2.33",

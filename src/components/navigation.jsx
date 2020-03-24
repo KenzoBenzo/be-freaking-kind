@@ -18,7 +18,9 @@ import {
   Text,
   Stat,
   StatLabel,
-  StatNumber
+  StatNumber,
+  DrawerContent,
+  DrawerOverlay
 } from "@chakra-ui/core";
 import { Link } from "gatsby";
 import { useCart } from "react-use-cart";
@@ -65,7 +67,7 @@ const Navigation = () => {
       <DarkMode>
         <Drawer
           isOpen={isOpen}
-          placement='right'
+          placement="right"
           finalFocusRef={btnRef}
           onClose={onClose}
           backgroundColor='gray.900'
@@ -73,60 +75,63 @@ const Navigation = () => {
           size='md'
           zIndex='2'
           isFullHeight>
-          <DrawerHeader
-            backgroundColor='gray.900'
-            color='white'
-            pos='sticky'
-            top='0'
-            zIndex='2'
-            display='flex'>
-            <DrawerCloseButton onClick={onClose} pos='absolute' />
-            <Heading as='h2' fontSize='2xl' mr={4}>
-              Cart
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader
+              backgroundColor='gray.900'
+              color='white'
+              pos='sticky'
+              top='0'
+              zIndex='2'
+              display='flex'>
+              <DrawerCloseButton onClick={onClose} pos='absolute' />
+              <Heading as='h2' fontSize='2xl' mr={4}>
+                Cart
             </Heading>
-            <Badge variantColor='teal' fontSize='xl'>
-              {totalItems > 0 ? totalItems : "0"}
-            </Badge>
-            <Text ml={2}>item{totalItems === 1 ? null : "s"}</Text>
-            <Divider borderColor='gray.800' />
-          </DrawerHeader>
+              <Badge variantColor='teal' fontSize='xl'>
+                {totalItems > 0 ? totalItems : "0"}
+              </Badge>
+              <Text ml={2}>item{totalItems === 1 ? null : "s"}</Text>
+              <Divider borderColor='gray.800' />
+            </DrawerHeader>
 
-          <DrawerBody backgroundColor='gray.900'>
-            <Stack spacing={4}>{items.map(CartItem)}</Stack>
-          </DrawerBody>
+            <DrawerBody backgroundColor='gray.900'>
+              <Stack spacing={4}>{items.map(CartItem)}</Stack>
+            </DrawerBody>
 
-          <DrawerFooter
-            backgroundColor='gray.900'
-            pos='sticky'
-            bottom='0'
-            w='100%'>
-            <Stack>
-              <Stat p={0} color='white' textAlign='right'>
-                <StatLabel>Subtotal</StatLabel>
-                <StatNumber>{isEmpty ? "-" : formattedSubTotal}</StatNumber>
-              </Stat>
-              <Divider color='gray.800' />
-              <Stack isInline mt={4}>
-                <Button
-                  variant='outline'
-                  mr={3}
-                  onClick={async () => emptyCart()}
-                  isDisabled={isEmpty}>
-                  Clear cart
+            <DrawerFooter
+              backgroundColor='gray.900'
+              pos='sticky'
+              bottom='0'
+              w='100%'>
+              <Stack>
+                <Stat p={0} color='white' textAlign='right'>
+                  <StatLabel>Subtotal</StatLabel>
+                  <StatNumber>{isEmpty ? "-" : formattedSubTotal}</StatNumber>
+                </Stat>
+                <Divider color='gray.800' />
+                <Stack isInline mt={4}>
+                  <Button
+                    variant='outline'
+                    mr={3}
+                    onClick={async () => emptyCart()}
+                    isDisabled={isEmpty}>
+                    Clear cart
                 </Button>
-                <LightMode>
-                  <Link to='/checkout' onClick={onClose}>
-                    <Button
-                      variantColor='red'
-                      fontWeight='600'
-                      isDisabled={isEmpty}>
-                      Checkout
+                  <LightMode>
+                    <Link to='/checkout' onClick={onClose}>
+                      <Button
+                        variantColor='red'
+                        fontWeight='600'
+                        isDisabled={isEmpty}>
+                        Checkout
                     </Button>
-                  </Link>
-                </LightMode>
+                    </Link>
+                  </LightMode>
+                </Stack>
               </Stack>
-            </Stack>
-          </DrawerFooter>
+            </DrawerFooter>
+          </DrawerContent>
         </Drawer>
       </DarkMode>
     </>
