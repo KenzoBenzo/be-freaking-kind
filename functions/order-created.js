@@ -1,39 +1,28 @@
+import sendgrid from "@sendgrid/mail";
+
 require("dotenv").config();
 
-const sgMail = require("@sendgrid/mail");
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-exports.handler = async ({ event, context, callback }) => {
+exports.handler = async (event, context) => {
   let body = JSON.parse(event.body);
-  console.log(body);
-
-  const msg = {
-    to: email,
-    from: process.env.SENDGRID_OWNER_EMAIL,
-    templateId: process.env.SENDGRID_ORDER_CREATED_ID,
-    dynamic_template_data: {
-      orderID: id,
-      name: name
-    }
-  };
 
   try {
-    await sgMail.send(msg).then(() => {
-      console.log(
-        `Contact form sent from: ${process.env.SENDGRID_OWNER_EMAIL}, to: ${body.email}, with name: ${body.name}`
-      );
-      callback();
+    await sendgrid.send({
+      to: body.email,
+      from: process.env.SENDGRID_OWNER_EMAIL,
+      templateId: process.env.SENDGRID_ORDER_CREATED_ID,
+      dynamic_template_data: {
+        orderID: body.id,
+        name: body.name,
+      },
     });
-
-    return {
-      statusCode: 200,
-      body: "Message sent"
-    };
   } catch (error) {
-    return {
-      statusCode: error.code,
-      body: JSON.stringify(error)
-    };
+    return res.status(error.statusCode || 500).json({ error: error.message });
   }
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ error: "" }),
+  };
 };

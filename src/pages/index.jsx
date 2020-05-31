@@ -6,16 +6,16 @@ import SEO from "../components/SEO";
 
 function IndexPage({
   data: {
-    cms: { products }
-  }
+    cms: { products },
+  },
 }) {
   return (
     <>
       <SEO
-        pageTitle='Home'
-        pageDescription='BeFreakingKind is an apparel company born out of the want to encourage people at the bare minimum, to be good people.'
+        pageTitle="Home"
+        pageDescription="BeFreakingKind is an apparel company born out of the want to encourage people at the bare minimum, to be good people."
       />
-      <Hero text='Just be fucking kind.' />
+      <Hero text={`Just be freaking kind.`} />
       <ProductGrid products={products} />
     </>
   );
@@ -38,7 +38,6 @@ export const pageQuery = graphql`
           }
           variants {
             formattedPrice
-            retail_price
           }
         }
       }

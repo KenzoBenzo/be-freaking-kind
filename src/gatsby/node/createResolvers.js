@@ -1,13 +1,10 @@
-const md5 = require("md5");
-const { createRemoteFileNode } = require("gatsby-source-filesystem");
-
 const createResolvers = ({
   actions: { createNode },
   cache,
   createNodeId,
   createResolvers,
   store,
-  reporter
+  reporter,
 }) => {
   const resolvers = {
     GraphCMS_Product: {
@@ -16,30 +13,10 @@ const createResolvers = ({
         resolve: ({ printfulProductId }, args, context, info) => {
           return context.nodeModel.getNodeById({
             id: printfulProductId,
-            type: `PrintfulProduct`
+            type: `PrintfulProduct`,
           });
-        }
-      }
-    },
-    GraphCMS_Review: {
-      gravatar: {
-        type: `File`,
-        resolve: ({ email }, args, context, info) => {
-          const url = `https://gravatar.com/avatar/${md5(
-            email.trim().toLowerCase(),
-            { encoding: "binary" }
-          )}`;
-
-          return createRemoteFileNode({
-            url,
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter
-          });
-        }
-      }
+        },
+      },
     },
     PrintfulVariant: {
       formattedPrice: {
@@ -47,9 +24,9 @@ const createResolvers = ({
         resolve: ({ retail_price }, args, context, info) => {
           return new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: "USD"
+            currency: "USD",
           }).format(retail_price / 100);
-        }
+        },
       },
       splitName: {
         type: `String!`,
@@ -57,9 +34,9 @@ const createResolvers = ({
           const [, splitVariantName] = name.split(" - ");
 
           return splitVariantName ? splitVariantName : name;
-        }
-      }
-    }
+        },
+      },
+    },
   };
 
   createResolvers(resolvers);

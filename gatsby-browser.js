@@ -13,7 +13,7 @@ const randomCartId = () =>
     .substring(7);
 
 const client = new GraphQLClient({
-  url: "/.netlify/functions/graphql"
+  url: "/.netlify/functions/graphql",
 });
 
 export const wrapPageElement = ({ element, props }) => {
@@ -25,29 +25,7 @@ export const wrapRootElement = ({ element }) => {
     <ThemeProvider theme={customTheme}>
       <StripeProvider>
         <ClientContext.Provider value={client}>
-          <CartProvider
-            id={randomCartId()}
-            // onItemAdd={handleItemAdded}
-            // onItemUpdate={() =>
-            //   useToast({
-            //     position: "top-right",
-            //     title: "Success!",
-            //     description: "Item updated!",
-            //     status: "success",
-            //     duration: 5000,
-            //     isClosable: true
-            //   })
-            // }
-            // onItemRemove={() =>
-            // useToast({
-            //   position: "top-right",
-            //   title: "Success!",
-            //   description: "Removed from cart.",
-            //   status: "success",
-            //   duration: 5000,
-            //   isClosable: true
-            // })}
-          >
+          <CartProvider id={randomCartId()}>
             <CSSReset />
             {element}
           </CartProvider>

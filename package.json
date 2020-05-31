@@ -9,7 +9,7 @@
     "prodserve": "gatsby build && gatsby serve"
   },
   "dependencies": {
-    "@chakra-ui/core": "0.6.1",
+    "@chakra-ui/core": "0.8.0",
     "@emotion/core": "10.0.28",
     "@emotion/styled": "10.0.27",
     "@sendgrid/mail": "^6.5.4",
