@@ -6,7 +6,6 @@ import queryString from "query-string";
 import { navigate } from "@reach/router";
 import {
   Heading,
-  Text,
   FormLabel,
   Select,
   Button,
@@ -19,15 +18,16 @@ import {
   Stack,
   Image,
   StatNumber,
-  useToast
+  useToast,
 } from "@chakra-ui/core";
 import SEO from "../components/SEO";
+import ReactMarkdown from "react-markdown";
 
 function ProductPage({
   data: {
-    cms: { product }
+    cms: { product },
   },
-  location
+  location,
 }) {
   const toast = useToast();
   const { variantId } = queryString.parse(location.search);
@@ -40,7 +40,7 @@ function ProductPage({
   const { addItem } = useCart();
 
   const activeVariant = variants.find(
-    variant => variant.id === activeVariantId
+    (variant) => variant.id === activeVariantId
   );
 
   useEffect(() => {
@@ -63,10 +63,11 @@ function ProductPage({
         templateColumns={[
           "repeat(auto-fill, 2fr)",
           "repeat(auto-fill, 2fr)",
-          "repeat(2, 2fr)"
+          "repeat(2, 2fr)",
         ]}
-        gap={16}>
-        <Tabs variant='line' borderBottomColor='gray.50'>
+        gap={16}
+      >
+        <Tabs variant="line" borderBottomColor="gray.50">
           <TabPanels>
             <TabPanel>
               <Img
@@ -87,14 +88,14 @@ function ProductPage({
               />
             </TabPanel>
             {product.images &&
-              product.images.map(image => (
+              product.images.map((image) => (
                 <TabPanel key={image.id}>
                   <Image
                     src={`https://media.graphcms.com/${image.handle}`}
-                    borderRadius='md'
-                    h='100%'
-                    maxH='400px'
-                    m='0 auto'
+                    borderRadius="md"
+                    h="100%"
+                    maxH="400px"
+                    m="0 auto"
                   />
                 </TabPanel>
               ))}
@@ -119,11 +120,11 @@ function ProductPage({
               />
             </Tab>
             {product.images &&
-              product.images.map(image => (
+              product.images.map((image) => (
                 <Tab key={image.handle}>
                   <Image
                     src={`https://media.graphcms.com/${image.handle}`}
-                    borderRadius='md'
+                    borderRadius="md"
                     h={16}
                     maxW={16}
                   />
@@ -133,21 +134,24 @@ function ProductPage({
         </Tabs>
 
         <Stack spacing={4}>
-          <Heading as='h1'>{product.name}</Heading>
+          <Heading as="h1">{product.name}</Heading>
 
           <StatNumber>
             {activeVariant && activeVariant.formattedPrice}
           </StatNumber>
 
-          {product.description && <Text>{product.description.markdown}</Text>}
-          <Stack isInline spacing={4} alignItems='flex-end'>
-            <FormLabel htmlFor='style' w='100%'>
+          {product.description && (
+            <ReactMarkdown source={product.description.markdown} />
+          )}
+          <Stack isInline spacing={4} alignItems="flex-end">
+            <FormLabel htmlFor="style" w="100%">
               Size
               <Select
-                id='style'
-                size='sm'
+                id="style"
+                size="sm"
                 value={activeVariantId}
-                onChange={({ target: { value } }) => setActiveVariantId(value)}>
+                onChange={({ target: { value } }) => setActiveVariantId(value)}
+              >
                 {variants.map((variant, index) => (
                   <option key={index} value={variant.id}>
                     {variant.splitName}
@@ -155,19 +159,20 @@ function ProductPage({
                 ))}
               </Select>
             </FormLabel>
-            <FormLabel htmlFor='quantity' w='100%' pr={0}>
+            <FormLabel htmlFor="quantity" w="100%" pr={0}>
               Quantity
               <Select
-                id='quantity'
-                size='sm'
+                id="quantity"
+                size="sm"
                 value={variantQuantity}
                 onChange={({ target: { value } }) =>
                   setVariantQuantity(parseInt(value))
-                }>
+                }
+              >
                 {new Array(5)
                   .fill(0)
                   .map((v, k) => k + 1)
-                  .map(i => ({ value: i, label: i }))
+                  .map((i) => ({ value: i, label: i }))
                   .map(({ value, label }) => (
                     <option key={value} value={value}>
                       {label}
@@ -177,9 +182,9 @@ function ProductPage({
             </FormLabel>
           </Stack>
           <Button
-            w='100%'
-            variantColor='red'
-            fontWeight='600'
+            w="100%"
+            variantColor="red"
+            fontWeight="600"
             onClick={() => {
               addItem(
                 {
@@ -187,20 +192,21 @@ function ProductPage({
                   price: activeVariant.retail_price,
                   image: activeVariant.variantImage,
                   name: activeVariant.name,
-                  description: product.description.markdown
+                  description: product.description.markdown,
                 },
                 variantQuantity
               );
               toast({
-                position: "top-right",
+                position: "bottom-right",
                 title: "Added to cart!",
                 description: `We've added ${activeVariant.name} x${variantQuantity} to your cart.`,
                 status: "success",
                 duration: 5000,
                 isClosable: true,
-              })
+              });
             }}
-            disabled={!activeVariant}>
+            disabled={!activeVariant}
+          >
             Add to cart
           </Button>
         </Stack>
