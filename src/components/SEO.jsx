@@ -56,6 +56,7 @@ function SEO({ children, pageDescription, pageTitle, pageUrl, image }) {
             content={withPrefix(image) || generalOG}
           />
         )}
+        <script src="https://recorder.meeshkan.com/record.js?client_id=makenna-bfk" />
       </Helmet>
       {children}
     </React.Fragment>
