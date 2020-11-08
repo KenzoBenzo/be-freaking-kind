@@ -26,7 +26,7 @@ const ContactPage = () => {
         <input type='hidden' name='bot-field' />
         <input type='hidden' name='form-name' value='contact' />
         <Box maxW='500px' mx='auto'>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor='name'>Your Name</FormLabel>
             <Input
               type='name'
@@ -35,7 +35,7 @@ const ContactPage = () => {
               mb={4}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor='email'>Email address</FormLabel>
             <Input
               type='email'
@@ -44,7 +44,7 @@ const ContactPage = () => {
               mb={4}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel>Message</FormLabel>
             <Textarea
               type='message'
