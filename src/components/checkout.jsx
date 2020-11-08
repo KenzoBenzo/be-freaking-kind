@@ -24,9 +24,10 @@ function Checkout() {
   return (
     <CheckoutProvider>
       <Grid
-        templateColumns={["auto-fill", "auto-fill", "2fr 3fr"]}
-        gap={6}
-        flexWrap='wrap'>
+        templateColumns={["auto-fill", "auto-fill", "1fr 1fr"]}
+        gap={8}
+        flexWrap='wrap'
+      maxW="1000px" mx="auto" >
         <CheckoutItemList />
         <CheckoutForm />
       </Grid>
