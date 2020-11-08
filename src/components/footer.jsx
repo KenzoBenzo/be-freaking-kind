@@ -20,13 +20,7 @@ const Footer = () => {
           <Button variant='ghost'>FAQ</Button>
         </DarkMode>
       </Link>
-      <Link to='/shipping/'>
-        <DarkMode>
-          <Button variant='ghost' mx={4}>
-            Shipping
-          </Button>
-        </DarkMode>
-      </Link>
+    
       <Link to='/contact/'>
         <DarkMode>
           <Button variant='ghost'>Contact</Button>
